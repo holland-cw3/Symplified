@@ -30,22 +30,21 @@ export default function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<Start/>}></Route>
-      <Route path='/survey' element={<Survey/>}></Route>
       <Route path='/symptoms' element={<Symptoms/>}></Route>
       <Route path='/camera' element={<Camera/>}></Route>
       <Route path='/audio' element={<Audio/>}></Route>
 
       <Route path='/moresymptoms' element={<More/>}></Route>
       <Route path='/thanks' element={<Thanks/>}></Route>
-      <Route path='/doctor' element={<Doctor/>}></Route>
+      <Route path='/basics' element={<BasicInfo/>}></Route>
 
       <Route path='/doctorlogin' element={<LoginScreen/>}></Route>
-      {/* <Route path='/doctor' element={
+      { <Route path='/doctor' element={
           <ProtectedRoute>
             <Doctor />
           </ProtectedRoute>
         } 
-      /> */}
+      /> }
     </Routes>
     </BrowserRouter>
   );

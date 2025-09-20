@@ -33,7 +33,7 @@ export default function PatientInfo() {
             localStorage.setItem(key.toUpperCase(), value);
         });
         localStorage.setItem('CHECKIN', checkinTime);
-        navigate('/symptoms1'); // next screen
+        navigate('/symptoms'); // next screen
     }
 
     useEffect(() => {
