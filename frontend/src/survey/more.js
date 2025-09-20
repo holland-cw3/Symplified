@@ -22,9 +22,26 @@ function base64ToBlob(base64, mimeType = "image/jpeg") {
 async function submit(){
     const formData = new FormData();
 
-    formData.append("name", localStorage.getItem("NAME"));
-    formData.append("symptomText", localStorage.getItem("AUDIOSYMPTOMS"));
-    formData.append("timestamp", localStorage.getItem("CHECKIN"));
+    const fields = [
+        'NAME',
+        'SEX',
+        'DOB',
+        'ADDRESS',
+        'BLOODTYPE',
+        'PHONE',
+        'EMAIL',
+        'INSURANCE',
+        'EMERGENCYPHONE',
+        'AUDIOSYMPTOMS',
+        'CHECKIN'
+    ];
+
+    fields.forEach(field => {
+        const value = localStorage.getItem(field);
+        if (value) {
+            formData.append(field.toLowerCase(), value); // key in lowercase
+        }
+    });
 
     const capturedImageBase64 = localStorage.getItem("capturedImage");
     if (capturedImageBase64) {

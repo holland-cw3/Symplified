@@ -15,6 +15,8 @@ import LoginScreen from './doctorTable/login.js'
 import { Navigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
+import BasicInfo from './survey/basicInfo.js'
+
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated, isLoading } = useAuth0();
