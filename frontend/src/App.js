@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Start from './survey/getStarted.js';
 import Survey from './survey/survey.js';
-import Symptoms1 from './survey/Symptoms1.js';
+import Symptoms from './survey/Symptoms.js';
 import Camera from './survey/Camera.js';
 import Audio from './survey/Audio.js';
 
@@ -21,7 +21,7 @@ export default function App() {
     <Routes>
       <Route path='/' element={<Start/>}></Route>
       <Route path='/survey' element={<Survey/>}></Route>
-      <Route path='/symptoms1' element={<Symptoms1/>}></Route>
+      <Route path='/symptoms' element={<Symptoms/>}></Route>
       <Route path='/camera' element={<Camera/>}></Route>
       <Route path='/audio' element={<Audio/>}></Route>
 

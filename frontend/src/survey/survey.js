@@ -11,8 +11,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 const steps = [
-    'Let\'s Get Started',
-    'What Is Your Name?',
+    'Let\'s Get Started!',
+    'What\'s Your Name?',
 ];
 
 export default function GetStarted() {
@@ -29,7 +29,7 @@ export default function GetStarted() {
         const checkinTime = new Date();
         localStorage.setItem('NAME', name);
         localStorage.setItem('CHECKIN', checkinTime);
-        navigate('/symptoms1');
+        navigate('/symptoms');
     }
 
     useEffect(() => {
@@ -60,7 +60,7 @@ export default function GetStarted() {
     return (
         <div className="getStarted">
             <Fade in={show} timeout={500}>
-                <Typography sx={{ 'fontWeight': 'bold', 'fontSize': '28px' }} >
+                <Typography sx={{ 'fontWeight': 'bold', 'fontSize': '32px', textShadow: '3px 3px 2px rgba(13, 62, 100, 0.3)' }}  >
                     {steps[index]}
                 </Typography>
             </Fade>

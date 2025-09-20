@@ -78,14 +78,14 @@ export default function MoreSymptoms() {
     return (
         <div className="getStarted">
             <Fade in={show} timeout={500}>
-                <Typography sx={{ 'fontWeight': 'bold', 'fontSize': '28px'}} >
+                <Typography sx={{ 'fontWeight': 'bold', 'fontSize': '32px', textShadow: '3px 3px 2px rgba(13, 62, 100, 0.3)' }}  >
                     {steps[index]}
                 </Typography>
             </Fade>
             {startButton && (
                 <div style={{ marginTop: '3vh', display: 'flex', flexDirection: 'row', gap: '1vw' }}>
                     <Fade in={show} timeout={500}>
-                        <a href="/" style={{ textDecoration: 'none' }}>
+                        <a href="/audio" style={{ textDecoration: 'none' }}>
                             <Button variant="contained" sx={{ marginTop: '3vh' }}>
                                 Yes
                             </Button>

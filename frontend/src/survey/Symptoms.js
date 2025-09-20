@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { useState, useEffect } from 'react';
 import { Fade } from '@mui/material';
 
-export default function Symptoms1() {
+export default function Symptoms() {
     const [index, setIndex] = useState(0);
     const [startButton, setStartButton] = useState(false);
     const [show, setShow] = useState(true);
@@ -49,7 +49,7 @@ export default function Symptoms1() {
     return (
         <div className="getStarted">
             <Fade in={show} timeout={500}>
-                <Typography sx={{ fontWeight: 'bold', fontSize: '28px' }} >
+                <Typography sx={{ 'fontWeight': 'bold', 'fontSize': '32px', textShadow: '3px 3px 2px rgba(13, 62, 100, 0.3)' }} >
                     {steps[index]}
                 </Typography>
             </Fade>

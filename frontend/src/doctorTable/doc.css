@@ -1,0 +1,18 @@
+.doc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    width: 100%;
+   
+
+    background-color: rgb(79, 196, 235);
+}
+
+.header {
+  width: 95%;
+  background-color: white;
+  margin: 0 auto; /* centers horizontally */
+}
