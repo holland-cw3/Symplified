@@ -5,7 +5,7 @@ import { Fade } from '@mui/material';
 
 const steps = [
     'Thank You!',
-    'A Doctor Will Be With You Shortly',
+    'A Doctor Will Be With You Shortly.',
 ];
 
 export default function Thanks() {

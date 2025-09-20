@@ -8,6 +8,7 @@ import Audio from './survey/Audio.js';
 
 import More from './survey/more.js';
 import Thanks from './survey/Thanks.js';
+import Doctor from './doctorTable/table.js'
 
 
 
@@ -34,7 +35,7 @@ export default function App() {
 
 
 
-      {/* <Route path='/doctor' element={Doctor}></Route> */}
+      <Route path='/doctor' element={<Doctor/>}></Route>
     </Routes>
     </BrowserRouter>
   );

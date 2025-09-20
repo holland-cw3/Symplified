@@ -4,18 +4,22 @@ import Button from '@mui/material/Button';
 import { useState, useEffect } from 'react';
 import { Fade } from '@mui/material';
 
-
-const steps = [
-    `Hi ${localStorage.getItem('NAME')}!`,
-    'What Brings You In Today?',
-];
-
 export default function Symptoms1() {
     const [index, setIndex] = useState(0);
     const [startButton, setStartButton] = useState(false);
     const [show, setShow] = useState(true);
+    const [steps, setSteps] = useState([
+        'Hi!',
+        'What Brings You In Today?',
+    ]);
 
-
+    useEffect(() => {
+        const name = localStorage.getItem('NAME') || 'Guest';
+        setSteps([
+            `Hi ${name}!`,
+            'What Brings You In Today?',
+        ]);
+    }, []);
 
     useEffect(() => {
         if (index < steps.length - 1) {
@@ -27,7 +31,7 @@ export default function Symptoms1() {
             setShow(true);
             setStartButton(true);
         }
-    }, [index]);
+    }, [index, steps.length]);
 
     useEffect(() => {
         if (!show && index < steps.length - 1) {
@@ -45,7 +49,7 @@ export default function Symptoms1() {
     return (
         <div className="getStarted">
             <Fade in={show} timeout={500}>
-                <Typography sx={{ 'fontWeight': 'bold', 'fontSize': '28px' }} >
+                <Typography sx={{ fontWeight: 'bold', fontSize: '28px' }} >
                     {steps[index]}
                 </Typography>
             </Fade>
@@ -69,9 +73,6 @@ export default function Symptoms1() {
                     </Fade>
                 </div>
             )}
-
         </div>
     );
 }
-
-

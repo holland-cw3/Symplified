@@ -4,8 +4,8 @@ import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 
-export default function  Dictaphone () {
-const navigate = useNavigate();
+export default function Dictaphone() {
+    const navigate = useNavigate();
 
     const {
         transcript,
@@ -20,26 +20,30 @@ const navigate = useNavigate();
 
 
     const submit = () => {
-        localStorage.setItem('symptoms', JSON.stringify(transcript))
+        localStorage.setItem('AUDIOSYMPTOMS', JSON.stringify(transcript))
         navigate('/moreSymptoms');
     }
 
     return (
         <div className='getStarted'>
+            <p className='bg-white' style={{ minHeight: '100px', width: '30vw', marginTop: '3vh',  marginBottom: '3vh', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', borderRadius: '10px', color: 'black'}}>
+                {transcript}
+            </p>
             <p>Microphone: {listening ? 'Recording...' : 'off'}</p>
-            <div className='flex flex-row'>
+            <div className='flex flex-row gap-2'>
                 <Button variant='contained' onClick={() =>
                     SpeechRecognition.startListening({
                         continuous: true,
                         language: 'en-US',
                         interimResults: true
                     })
-                } sx={{ marginRight: '2px' }}>Start</Button>
+                }>Record</Button>
                 <Button variant='contained' onClick={SpeechRecognition.stopListening}>Stop</Button>
+                            <Button variant='contained' onClick={() => { submit() }}>Submit</Button>
+
             </div>
 
-            <p>{transcript}</p>
-            <Button variant='contained' onClick={() => { submit() }}>Submit</Button>
+            
 
         </div>
     );

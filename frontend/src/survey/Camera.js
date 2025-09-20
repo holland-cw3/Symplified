@@ -2,6 +2,15 @@ import React, { useRef, useState, useCallback } from "react";
 import ReactWebcam from "react-webcam";
 import './getStarted.css';
 import { useNavigate } from 'react-router-dom';
+import { Button } from "@mui/material";
+
+function submit(){
+    const obj = {
+        name: localStorage.getItem('NAME'), 
+
+    }
+    localStorage.getItem('Symtom')
+}
 
 
 export default function Camera() {
@@ -18,7 +27,7 @@ export default function Camera() {
     };
 
     const submitPic = () => {
-        localStorage.setItem("capturedImage", image);
+        localStorage.setItem("IMAGESYMPTOMS", image);
         navigate('/moreSymptoms');
 
     }
@@ -40,7 +49,7 @@ export default function Camera() {
                 <>
                     <ReactWebcam
                         audio={false}
-                        mirrored={true}             // mirrors front camera
+                        mirrored={true}            
                         ref={webcamRef}
                         screenshotFormat="image/jpeg"
                         videoConstraints={videoConstraints}
@@ -48,24 +57,21 @@ export default function Camera() {
                     />
 
                     <div className="camera-buttons">
-                        <button className="capture-btn" onClick={capture}>
+                        <Button variant='contained' className="capture-btn" onClick={capture}>
                             Capture
-                        </button>
-                        <button className="capture-btn" onClick={toggleCamera}>
-                            Switch Camera
-                        </button>
+                        </Button>
                     </div>
                 </>
             ) : (
                 <>
                     <img src={image} alt="Captured" className="captured-image" />
-                    <div className="flex flew-row">
-                        <button className="capture-btn" onClick={() => {submitPic()}}>
+                    <div className="flex flew-row gap-4 mt-2">
+                        <Button variant='contained' className="capture-btn" onClick={() => {submitPic()}}>
                             Continue
-                        </button>
-                        <button className="capture-btn" onClick={() => setImage(null)}>
+                        </Button>
+                        <Button variant='contained' className="capture-btn" onClick={() => setImage(null)}>
                             Retake
-                        </button>
+                        </Button>
                     </div>
 
                 </>
