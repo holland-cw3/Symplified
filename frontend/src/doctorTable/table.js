@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import img from './image.png';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 
@@ -37,9 +38,23 @@ function PatientCard() {
 
 
 export default function Table() {
-    return (
-        <div className='getStarted'>
-            <PatientCard />
-        </div>
-    );
+  const { logout, isAuthenticated, user } = useAuth0();
+
+  return (
+    <div className='getStarted'>
+      <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', marginBottom: '1rem' }}>
+        <h2>Doctor Dashboard</h2>
+        {isAuthenticated && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div>Signed in as {user?.name}</div>
+            <Button variant="contained" color="secondary" onClick={() => logout({ returnTo: window.location.origin + '/doctorlogin' })}>
+              Log Out
+            </Button>
+          </div>
+        )}
+      </div>
+
+      <PatientCard />
+    </div>
+  );
 }
