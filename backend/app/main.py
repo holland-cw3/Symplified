@@ -7,13 +7,21 @@ from pymongo import MongoClient
 from gridfs import GridFS
 from datetime import datetime
 from bson import ObjectId
+from urllib.parse import quote_plus
+
 
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
+
 # Mongo setup
-mongoClient = MongoClient("mongodb://localhost:27017")
+username = "chollan1"
+password = "3Abc5bdWdJ0wHPti"  # your raw password
+
+mongo_uri = f"mongodb+srv://{username}:{password}@cluster0.taz9t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster07"
+mongoClient = MongoClient(mongo_uri)
+
 db = mongoClient["healthcare_app"]
 fs = GridFS(db)
 
