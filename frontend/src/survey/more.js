@@ -9,6 +9,42 @@ const steps = [
     `Do You Have Any Other Symptoms?`,
 ];
 
+function base64ToBlob(base64, mimeType = "image/jpeg") {
+    const byteString = atob(base64.split(",")[1]);
+    const byteNumbers = new Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) {
+        byteNumbers[i] = byteString.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: mimeType });
+}
+
+async function submit(){
+    const formData = new FormData();
+
+    formData.append("name", localStorage.getItem("NAME"));
+    formData.append("symptomText", localStorage.getItem("symptoms"));
+    formData.append("timestamp", localStorage.getItem("CHECKIN"));
+
+    const capturedImageBase64 = localStorage.getItem("capturedImage");
+    if (capturedImageBase64) {
+        const blob = base64ToBlob(capturedImageBase64);
+        formData.append("symptomImages", blob, "captured.jpg");
+    }
+
+    try {
+        const response = await fetch("http://127.0.0.1:5000/process", {
+            method: "POST",
+            body: formData,
+        });
+
+        const data = await response.json();
+        console.log("Gemini response:", data);
+    } catch (err) {
+        console.error("Error submitting data:", err);
+    }
+}
+
 export default function MoreSymptoms() {
     const [index, setIndex] = useState(0);
     const [startButton, setStartButton] = useState(false);
@@ -58,7 +94,11 @@ export default function MoreSymptoms() {
                     
                     <Fade in={show} timeout={500}>
                         <a href="/thanks" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" sx={{ marginTop: '3vh' }}>
+                            <Button variant="contained" sx={{ marginTop: '3vh' }} 
+                            onClick={async () => {
+                                await submit();    
+                                window.location.href = "/thanks"; 
+                            }}>
                                 No
                             </Button>
                         </a>
