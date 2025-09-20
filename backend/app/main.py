@@ -32,8 +32,16 @@ class ProcessInput(Resource):
     def post(self):
         #collect user data from survey
         name = request.form.get("name")
-        symptom_text = request.form.get("symptomText")
-        timestamp = request.form.get("timestamp") or datetime.now().isoformat()
+        sex = request.form.get("sex")
+        dob = request.form.get("dob")
+        address = request.form.get("address")
+        blood_type = request.form.get("bloodtype")
+        phone = request.form.get("phone")
+        email = request.form.get("email")
+        insurance = request.form.get("insurance")
+        emergency_phone = request.form.get("emergencyphone")
+        audio_symptoms = request.form.get("audiosymptoms")
+        checkin = request.form.get("checkin") or datetime.now().isoformat()
 
         #collect image files
         image_files = request.files.getlist("symptomImages")
@@ -46,9 +54,17 @@ class ProcessInput(Resource):
         #create mongo entry
         entry = {
             "name": name,
-            "symptom_text": symptom_text,
-            "image_ids": image_ids,
-            "timestamp": timestamp
+            "sex": sex,
+            "dob": dob,
+            "address": address,
+            "blood_type": blood_type,
+            "phone": phone,
+            "email": email,
+            "insurance": insurance,
+            "emergency_phone": emergency_phone,
+            "audio_symptoms": audio_symptoms,
+            "checkin": checkin,
+            "image_ids": image_ids
         }
         
         #insert entry into DB
@@ -66,7 +82,7 @@ class ProcessInput(Resource):
         prompt = (
             "You are a medical assistant.\n"
             f"A patient reports the following symptoms:\n\n"
-            f"Description: {symptom_text}\n"
+            f"Description: {audio_symptoms}\n"
             f"The patient has provided {len(image_ids)} images: \n\n"
             "Analyze the patient's reported symptoms and provided images and return a list of identified symptoms in a comma separated format\n" \
             "For example: 'runny nose, cut on finger, bruise on elbow'"

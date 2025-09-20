@@ -53,7 +53,7 @@ export default function GetStarted() {
             {startButton && (
                 <Fade in={show} timeout={4000}>
 
-                    <a href="/survey">
+                    <a href="/basics">
                         <Button variant="contained" sx={{ marginTop: '5vh' }}>
                             Get Started
                         </Button>

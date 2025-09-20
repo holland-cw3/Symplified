@@ -23,20 +23,26 @@ async function submit(){
     // const formData = new FormData();
 
 
-    let formData = {}
+    const fields = [
+        'NAME',
+        'SEX',
+        'DOB',
+        'ADDRESS',
+        'BLOODTYPE',
+        'PHONE',
+        'EMAIL',
+        'INSURANCE',
+        'EMERGENCYPHONE',
+        'AUDIOSYMPTOMS',
+        'CHECKIN'
+    ];
 
-    formData['name']= localStorage.getItem("NAME");
-    formData['symptomText']= localStorage.getItem("AUDIOSYMPTOMS");
-    formData['timestamp']= localStorage.getItem("CHECKIN");
-
-
-
-    alert(JSON.stringify(formData))
-
-
-    
-
-    alert(JSON.stringify(formData))
+    fields.forEach(field => {
+        const value = localStorage.getItem(field);
+        if (value) {
+            formData.append(field.toLowerCase(), value); // key in lowercase
+        }
+    });
 
     const capturedImageBase64 = localStorage.getItem("capturedImage");
     if (capturedImageBase64) {
