@@ -23,7 +23,7 @@ async function submit(){
     const formData = new FormData();
 
     formData.append("name", localStorage.getItem("NAME"));
-    formData.append("symptomText", localStorage.getItem("symptoms"));
+    formData.append("symptomText", localStorage.getItem("AUDIOSYMPTOMS"));
     formData.append("timestamp", localStorage.getItem("CHECKIN"));
 
     const capturedImageBase64 = localStorage.getItem("capturedImage");

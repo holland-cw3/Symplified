@@ -4,14 +4,6 @@ import './getStarted.css';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@mui/material";
 
-function submit(){
-    const obj = {
-        name: localStorage.getItem('NAME'), 
-
-    }
-    localStorage.getItem('Symtom')
-}
-
 
 export default function Camera() {
     const webcamRef = useRef(null);

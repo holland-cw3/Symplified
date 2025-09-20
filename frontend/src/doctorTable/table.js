@@ -1,5 +1,7 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, Typography } from "@mui/material";
+import { useAuth0 } from '@auth0/auth0-react';
+
 
 const patients = [
   { id: 1, name: "Caleb Holland", age: 35, bloodType: "O+", waitTime: 80, severity: 7 },
@@ -9,6 +11,10 @@ const patients = [
 ];
 
 export default function PatientDataTable() {
+    const { logout, isAuthenticated, user } = useAuth0();
+
+    // isAuthenticated
+
   const columns = [
     { field: "name", headerName: "Patient Name", flex: 1 },
     { field: "age", headerName: "Age", type: "number", flex: 0.5 },
@@ -47,10 +53,12 @@ export default function PatientDataTable() {
   return (
     <div className="doc">
       <div style={{backgroundColor:'white', width: "95%",  margin: '2.25vh auto 0 auto', borderRadius: '15px', padding:'1vw',  boxShadow: 'rgba(0, 0, 0, 0.4) 0px 3px 8px', display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}} >
-        <Typography variant="h6"><strong>Hello Doctor!</strong></Typography>
+        <Typography variant="h6"><strong>Hello {user?.name}!</strong></Typography>
         <Typography variant="h6"><strong>Symplified</strong></Typography>
         <div>
-          <Button variant="contained" color="success">Logout</Button>
+            <Button variant="contained" color="success" onClick={() => logout({ returnTo: window.location.origin + '/doctorlogin' })}>
+              Log Out
+            </Button>
         </div>
       </div>
       <div style={{ height: '82vh', width: "95%",  margin: '3vh auto 0 auto' }}>

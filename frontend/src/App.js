@@ -10,8 +10,18 @@ import More from './survey/more.js';
 import Thanks from './survey/Thanks.js';
 import Doctor from './doctorTable/table.js'
 
+import LoginScreen from './doctorTable/login.js'
+
+import { Navigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
+function ProtectedRoute({ children }) {
+  const { isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) return <div>Loading...</div>;
+  return isAuthenticated ? children : <Navigate to="/doctorlogin" />;
+}
 
 
 export default function App() {
@@ -28,14 +38,13 @@ export default function App() {
       <Route path='/moresymptoms' element={<More/>}></Route>
       <Route path='/thanks' element={<Thanks/>}></Route>
 
-
-
-
-
-
-
-
-      <Route path='/doctor' element={<Doctor/>}></Route>
+      <Route path='/doctorlogin' element={<LoginScreen/>}></Route>
+      <Route path='/doctor' element={
+          <ProtectedRoute>
+            <Doctor />
+          </ProtectedRoute>
+        } 
+      />
     </Routes>
     </BrowserRouter>
   );
