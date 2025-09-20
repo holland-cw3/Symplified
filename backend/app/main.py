@@ -8,16 +8,19 @@ from gridfs import GridFS
 from datetime import datetime
 from bson import ObjectId
 from urllib.parse import quote_plus
+from dotenv import load_dotenv
+import os
 
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
 
-# Mongo setup
-username = "chollan1"
-password = "3Abc5bdWdJ0wHPti"  # your raw password
+username = os.getenv("MONGO_USERNAME")
+password = os.getenv("MONGO_PASSWORD")
 
 mongo_uri = f"mongodb+srv://{username}:{password}@cluster0.taz9t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster07"
 mongoClient = MongoClient(mongo_uri)
@@ -30,7 +33,6 @@ db.symptom_entries.update_many({}, {"$unset": {"firstName": "", "lastName": ""}}
 
 class ProcessInput(Resource):
     def post(self):
-        #collect user data from survey
         name = request.form.get("name")
         sex = request.form.get("sex")
         dob = request.form.get("dob")
