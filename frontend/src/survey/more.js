@@ -20,11 +20,23 @@ function base64ToBlob(base64, mimeType = "image/jpeg") {
 }
 
 async function submit(){
-    const formData = new FormData();
+    // const formData = new FormData();
 
-    formData.append("name", localStorage.getItem("NAME"));
-    formData.append("symptomText", localStorage.getItem("AUDIOSYMPTOMS"));
-    formData.append("timestamp", localStorage.getItem("CHECKIN"));
+
+    let formData = {}
+
+    formData['name']= localStorage.getItem("NAME");
+    formData['symptomText']= localStorage.getItem("AUDIOSYMPTOMS");
+    formData['timestamp']= localStorage.getItem("CHECKIN");
+
+
+
+    alert(JSON.stringify(formData))
+
+
+    
+
+    alert(JSON.stringify(formData))
 
     const capturedImageBase64 = localStorage.getItem("capturedImage");
     if (capturedImageBase64) {
@@ -40,6 +52,8 @@ async function submit(){
 
         const data = await response.json();
         console.log("Gemini response:", data);
+        localStorage.clear();
+
     } catch (err) {
         console.error("Error submitting data:", err);
     }

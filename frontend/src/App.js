@@ -37,14 +37,15 @@ export default function App() {
 
       <Route path='/moresymptoms' element={<More/>}></Route>
       <Route path='/thanks' element={<Thanks/>}></Route>
+      <Route path='/doctor' element={<Doctor/>}></Route>
 
       <Route path='/doctorlogin' element={<LoginScreen/>}></Route>
-      <Route path='/doctor' element={
+      {/* <Route path='/doctor' element={
           <ProtectedRoute>
             <Doctor />
           </ProtectedRoute>
         } 
-      />
+      /> */}
     </Routes>
     </BrowserRouter>
   );

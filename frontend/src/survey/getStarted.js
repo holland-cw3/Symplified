@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import { useState, useEffect } from 'react';
 import { Fade } from '@mui/material';
 
-localStorage.clear()
 
 const steps = [
     'Hi!',
