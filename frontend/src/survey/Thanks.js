@@ -3,7 +3,6 @@ import './getStarted.css';
 import { useState, useEffect } from 'react';
 import { Fade } from '@mui/material';
 
-
 const steps = [
     'Thank You!',
     'A Doctor Will Be With You Shortly',
