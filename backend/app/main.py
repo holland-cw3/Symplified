@@ -115,7 +115,6 @@ class ProcessInput(Resource):
         for item in symptoms.split(","):
             item = item.strip()
             if "(" in item and ")" in item:
-                # Split the symptom and severity
                 symptom_name = item[:item.rfind("(")].strip()
                 severity = int(item[item.rfind("(")+1:item.rfind(")")])
                 symptomList.append(symptom_name)
