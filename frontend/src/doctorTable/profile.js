@@ -37,7 +37,7 @@ export default function PatientFile() {
   return (
     <div className='doc'>
       <Header />
-      <Typography variant="h4" gutterBottom sx={{ mt: '14vh', ml: 2 }}>
+      <Typography variant="h4" gutterBottom sx={{ mt: '10vh', ml: 2 }}>
       </Typography>
 
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, marginTop: 2, marginLeft: 2, marginRight: 2 }}>
