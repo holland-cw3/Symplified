@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, Typography } from "@mui/material";
-import { useAuth0 } from "@auth0/auth0-react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
+import DescriptionIcon from "@mui/icons-material/Description"; // 📄 file icon
+import Header from "./header";
+import './doc.css'
 
 async function getData() {
   try {
@@ -17,7 +20,6 @@ async function getData() {
 }
 
 export default function PatientDataTable() {
-  const { logout, user } = useAuth0();
   const [data, setData] = useState([]);
 
   const handleSeeFile = (patientId) => {
@@ -34,7 +36,6 @@ export default function PatientDataTable() {
       });
       const result = await response.json();
       if (result.success) {
-        // Remove deleted row from state
         setData((prev) => prev.filter((p) => p.id !== patientId));
       } else {
         console.error("Failed to delete:", result.message);
@@ -68,6 +69,7 @@ export default function PatientDataTable() {
           bloodType: patient.blood_type,
           waitTime: waitTime,
           severity: patient.severity || 0,
+          fullPatient: patient
         };
       });
 
@@ -85,29 +87,36 @@ export default function PatientDataTable() {
     { field: "severity", headerName: "Severity Score", type: "number", flex: 1 },
     {
       field: "actions",
-      headerName: "Actions",
+      headerName: "",
       sortable: false,
       filterable: false,
       flex: 1,
       renderCell: (params) => {
         return (
           <>
-            <Button
-              variant="contained"
-              size="small"
-              sx={{ mr: 1 }}
-              onClick={() => handleSeeFile(params.id)}
+            <div
+              style={{
+               
+                display: "flex",
+                justifyContent: "flex-end",
+                width: "100%",
+              }}
             >
-              See File
-            </Button>
-            <Button
-              variant="contained"
-              color="error"
-              size="small"
-              onClick={() => handleDelete(params.id)}
-            >
-              Delete
-            </Button>
+              <IconButton
+                color='primary'
+                onClick={() => handleSeeFile(params.id)}
+                sx={{ mr: 1 }}
+              >
+                <DescriptionIcon />
+              </IconButton>
+              <IconButton
+                size="small"
+                color='error'
+                onClick={() => handleDelete(params.id)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </div>
           </>
         );
       },
@@ -116,57 +125,48 @@ export default function PatientDataTable() {
 
   return (
     <div className="doc">
+      <Header/>
       <div
         style={{
-          backgroundColor: "white",
+          height: "85vh",
           width: "95%",
-          margin: "2.25vh auto 0 auto",
-          borderRadius: "15px",
-          padding: "1vw",
-          boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Typography variant="h6">
-          <strong>Hello {user?.name}!</strong>
-        </Typography>
-        <Typography variant="h6">
-          <strong>Symplified</strong>
-        </Typography>
-        <div>
-          <Button
-            variant="contained"
-            color="success"
-            onClick={() =>
-              logout({ returnTo: window.location.origin + "/doctorlogin" })
-            }
-          >
-            Log Out
-          </Button>
-        </div>
-      </div>
-      <div
-        style={{
-          height: "82vh",
-          width: "95%",
-          margin: "3vh auto 0 auto",
+          margin: "8vh auto 0 auto",
         }}
       >
         <DataGrid
           rows={data}
           columns={columns}
           pageSize={5}
-          rowsPerPageOptions={[5]}
+          initialState={{
+            pagination: { paginationModel: { pageSize: 10 } },
+          }}
+          pageSizeOptions={[5, 10, 25]}
           sortModel={[
             { field: "severity", sort: "desc" },
             { field: "waitTime", sort: "desc" },
           ]}
           sx={{
             borderRadius: "15px",
-            boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px;",
+            boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px",
+            '& .MuiDataGrid-columnHeader': {
+              backgroundColor: "white",
+              color: "black",
+              fontWeight: 900,
+            },
+            "& .MuiDataGrid-columnHeaderTitle": {
+              color: "black",
+              fontWeight: 900,
+              fontSize: "15px",
+            },
+            "& .MuiDataGrid-row:nth-of-type(odd)": {
+              backgroundColor: "#f7f7f7",
+            },
+            "& .MuiDataGrid-row:nth-of-type(even)": {
+              backgroundColor: "#ecedf2c2",
+            },
+            "& .MuiDataGrid-cell": {
+              color: "#333",
+            },
           }}
         />
       </div>
