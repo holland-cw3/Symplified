@@ -97,7 +97,9 @@ export default function PatientInfo() {
                             sx={{ flex: 1 }}
                         />
                         <TextField
-                            label="Age"
+                            label="Date of Birth"
+                            type="date"
+                            InputLabelProps={{ shrink: true }}
                             value={formData.dob}
                             onChange={(e) => handleChange('dob', e.target.value)}
                             sx={{ flex: 1 }}
