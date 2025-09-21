@@ -41,15 +41,15 @@ export default function PatientFile() {
       <Typography variant="h4" gutterBottom sx={{ mt: '14vh', ml: 2 }}>
       </Typography>
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, mt: 2, flexWrap: 'wrap' }}>
-        <div className="flex flex-col gap-6" style={{ minWidth: 300 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, mt: 2 }}>
+        <div className="flex flex-col gap-8" style={{ minWidth: 300 }}>
           <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>Personal Info</Typography>
               <Table size="small">
                 <TableBody>
                   <TableRow><TableCell><strong>Name</strong></TableCell><TableCell>{patient.name}</TableCell></TableRow>
-                  <TableRow><TableCell><strong>Age</strong></TableCell><TableCell>{patient.age}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Age</strong></TableCell><TableCell>{patient.dob}</TableCell></TableRow>
                   <TableRow><TableCell><strong>Sex</strong></TableCell><TableCell>{patient.sex}</TableCell></TableRow>
                   <TableRow><TableCell><strong>Blood Type</strong></TableCell><TableCell>{patient.blood_type}</TableCell></TableRow>
                 </TableBody>
@@ -62,7 +62,7 @@ export default function PatientFile() {
               <Table size="small">
                 <TableBody>
                   <TableRow><TableCell><strong>Email</strong></TableCell><TableCell>{patient.email}</TableCell></TableRow>
-                  <TableRow><TableCell><strong>Phone</strong></TableCell><TableCell>{patient.phone}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Phone</strong></TableCell><TableCell>{patient.emergency_phone}</TableCell></TableRow>
                   <TableRow><TableCell><strong>Emergency Phone</strong></TableCell><TableCell>{patient.emergency_phone}</TableCell></TableRow>
                   <TableRow><TableCell><strong>Address</strong></TableCell><TableCell>{patient.address}</TableCell></TableRow>
                   <TableRow><TableCell><strong>Insurance</strong></TableCell><TableCell>{patient.insurance}</TableCell></TableRow>
@@ -78,13 +78,13 @@ export default function PatientFile() {
             <CardContent>
               <Typography variant="h6" gutterBottom>Uploaded Images</Typography>
               {imageUrls.length > 0 ? (
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                <Box sx={{ display: "flex", flexDirection: 'column', flexWrap: "wrap", gap: 1 }}>
                   {imageUrls.map((url, idx) => (
                     <img
                       key={idx}
                       src={url}
                       alt={`Patient upload ${idx + 1}`}
-                      style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "8px" }}
+                      style={{ width: "100px", height: "134px", objectFit: "cover", borderRadius: "8px" }}
                     />
                   ))}
                 </Box>
@@ -96,18 +96,32 @@ export default function PatientFile() {
         </div>
 
         <div style={{ minWidth: 300 }}>
-          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
+          <Card sx={{ borderRadius: 3, boxShadow: 3, minHeight:'215px' }}>
             <CardContent>
-              <Typography variant="h6" gutterBottom>Reported Symptoms</Typography>
-              <Typography sx={{ whiteSpace: "pre-wrap" }}>
-                {patient.gemini_output || patient.audio_symptoms || "No symptoms recorded"}
+              <Typography variant="h6" gutterBottom>
+                Reported Symptoms
               </Typography>
+              {patient.gemini_output || patient.audio_symptoms ? (
+                <ul style={{ paddingLeft: "1.5rem", margin: 0, listStyleType: "disc" }}>
+                  {(patient.gemini_output || patient.audio_symptoms)
+                    .split(",")
+                    .map((symptom, idx) => (
+                      <li key={idx} style={{ marginBottom: "0.5rem" }}>
+                        <Typography variant="body1">{symptom.trim()}</Typography>
+                      </li>
+                    ))}
+                </ul>
+              ) : (
+                <Typography>No symptoms recorded</Typography>
+              )}
             </CardContent>
+
+
           </Card>
         </div>
 
         <div style={{ minWidth: 300 }}>
-          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
+          <Card sx={{ borderRadius: 3, boxShadow: 3, minHeight:'215px' }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>Summary</Typography>
               <Typography sx={{ whiteSpace: "pre-wrap" }}>

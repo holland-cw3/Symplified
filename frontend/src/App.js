@@ -44,7 +44,7 @@ export default function App() {
       <Route path='/basics' element={<BasicInfo/>}></Route>
 
       <Route path='/doctorlogin' element={<LoginScreen/>}></Route>
-      <Route path='/doctor' element={
+      {/* <Route path='/doctor' element={
           <ProtectedRoute>
             <Doctor />
           </ProtectedRoute>
@@ -56,7 +56,7 @@ export default function App() {
             <PatientFile />
           </ProtectedRoute>
         } 
-      />
+      /> */}
 
       <Route path='/doctor' element={<Doctor/>}></Route>
       <Route path='/patientfile' element={<PatientFile/>}></Route>

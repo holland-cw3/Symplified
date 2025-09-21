@@ -3,7 +3,7 @@ import './getStarted.css';
 import { useState, useEffect } from 'react';
 import { Fade } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import logo from "../logo.png"
+import logo from "../thnxLogo.png"
 
 const steps = [
     "You're All Set!",
