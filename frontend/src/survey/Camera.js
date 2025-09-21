@@ -52,6 +52,7 @@ export default function AudioCameraCombined() {
     if (existing === null) {
       localStorage.setItem("IMAGESYMPTOMS", JSON.stringify([capturedImage]));
     } else {
+      console.log(existing)
       let curr = JSON.parse(existing); // now curr is always an array
       curr.push(capturedImage);
       localStorage.setItem("IMAGESYMPTOMS", JSON.stringify(curr));

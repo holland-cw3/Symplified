@@ -25,7 +25,7 @@ const Bear = ({ imgSrc, size = 125, speed = 30 }) => {
 
   const animate = () => {
     const s = stateRef.current;
-    let nextPos = s.pos + s.dir * (speed / 60);
+    let nextPos = s.pos + s.dir * (speed / 20);
     const width = window.innerWidth;
 
     // Mirror reflection at edges
