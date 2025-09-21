@@ -28,7 +28,7 @@ export default function PatientFile() {
       // fetch all images
       if (fullPatient.image_ids && fullPatient.image_ids.length > 0) {
         Promise.all(fullPatient.image_ids.map(id => getImage(id)))
-          .then(urls => setImageUrls(urls.filter(Boolean))); // remove failed fetches
+          .then(urls => setImageUrls(urls.filter(Boolean)));
       }
     }
   }, []);
@@ -43,64 +43,68 @@ export default function PatientFile() {
       </Typography>
 
       <Grid container spacing={3} sx={{ p: 2 }}>
-        {/* Personal Info */}
-        <Grid item xs={12} md={6}>
-          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>Personal Info</Typography>
-              <Table size="small">
-                <TableBody>
-                  <TableRow><TableCell><strong>Age</strong></TableCell><TableCell>{patient.age}</TableCell></TableRow>
-                  <TableRow><TableCell><strong>Sex</strong></TableCell><TableCell>{patient.sex}</TableCell></TableRow>
-                  <TableRow><TableCell><strong>Blood Type</strong></TableCell><TableCell>{patient.blood_type}</TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+        {/* First Row */}
+        <Grid container item xs={12} spacing={3}>
+          {/* Left: Personal Info + Contact Info */}
+          <Grid item xs={12} md={6} container spacing={3} direction="column">
+            <Grid item>
+              <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom>Personal Info</Typography>
+                  <Table size="small">
+                    <TableBody>
+                      <TableRow><TableCell><strong>Age</strong></TableCell><TableCell>{patient.age}</TableCell></TableRow>
+                      <TableRow><TableCell><strong>Sex</strong></TableCell><TableCell>{patient.sex}</TableCell></TableRow>
+                      <TableRow><TableCell><strong>Blood Type</strong></TableCell><TableCell>{patient.blood_type}</TableCell></TableRow>
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item>
+              <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom>Contact Info</Typography>
+                  <Table size="small">
+                    <TableBody>
+                      <TableRow><TableCell><strong>Email</strong></TableCell><TableCell>{patient.email}</TableCell></TableRow>
+                      <TableRow><TableCell><strong>Phone</strong></TableCell><TableCell>{patient.phone}</TableCell></TableRow>
+                      <TableRow><TableCell><strong>Emergency Phone</strong></TableCell><TableCell>{patient.emergency_phone}</TableCell></TableRow>
+                      <TableRow><TableCell><strong>Address</strong></TableCell><TableCell>{patient.address}</TableCell></TableRow>
+                      <TableRow><TableCell><strong>Insurance</strong></TableCell><TableCell>{patient.insurance}</TableCell></TableRow>
+                      <TableRow><TableCell><strong>Check-in</strong></TableCell><TableCell>{patient.checkin}</TableCell></TableRow>
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+
+          {/* Right: Uploaded Images */}
+          <Grid item xs={12} md={6}>
+            <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>Uploaded Images</Typography>
+                {imageUrls.length > 0 ? (
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                    {imageUrls.map((url, idx) => (
+                      <img
+                        key={idx}
+                        src={url}
+                        alt={`Patient upload ${idx + 1}`}
+                        style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "8px" }}
+                      />
+                    ))}
+                  </Box>
+                ) : (
+                  <Typography>No images uploaded</Typography>
+                )}
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
 
-        <Grid item xs={12} md={6}>
-          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>Contact Info</Typography>
-              <Table size="small">
-                <TableBody>
-                  <TableRow><TableCell><strong>Email</strong></TableCell><TableCell>{patient.email}</TableCell></TableRow>
-                  <TableRow><TableCell><strong>Phone</strong></TableCell><TableCell>{patient.phone}</TableCell></TableRow>
-                  <TableRow><TableCell><strong>Emergency Phone</strong></TableCell><TableCell>{patient.emergency_phone}</TableCell></TableRow>
-                  <TableRow><TableCell><strong>Address</strong></TableCell><TableCell>{patient.address}</TableCell></TableRow>
-                  <TableRow><TableCell><strong>Insurance</strong></TableCell><TableCell>{patient.insurance}</TableCell></TableRow>
-                  <TableRow><TableCell><strong>Check-in</strong></TableCell><TableCell>{patient.checkin}</TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        {/* Uploaded Images */}
-        <Grid item xs={12}>
-          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>Uploaded Images</Typography>
-              {imageUrls.length > 0 ? (
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                  {imageUrls.map((url, idx) => (
-                    <img
-                      key={idx}
-                      src={url}
-                      alt={`Patient upload ${idx + 1}`}
-                      style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "8px" }}
-                    />
-                  ))}
-                </Box>
-              ) : (
-                <Typography>No images uploaded</Typography>
-              )}
-            </CardContent>
-          </Card>
-        </Grid>
-
-        {/* Reported Symptoms */}
+        {/* Second Row */}
         <Grid item xs={12}>
           <Card sx={{ borderRadius: 3, boxShadow: 3, bgcolor: "#f0f0f0" }}>
             <CardContent>
@@ -112,7 +116,6 @@ export default function PatientFile() {
           </Card>
         </Grid>
 
-        {/* Summary */}
         <Grid item xs={12}>
           <Card sx={{ borderRadius: 3, boxShadow: 3, bgcolor: "#eaf2fb" }}>
             <CardContent>
