@@ -18,6 +18,7 @@ export default function Thanks() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        localStorage.clear();
         let timeout;
         if (index < steps.length - 1) {
             timeout = setTimeout(() => {
