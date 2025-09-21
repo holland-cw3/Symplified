@@ -12,7 +12,16 @@ Symplified collects basic information from users through a simple survey. Users 
 
 # How we built it
 
-## Frontend
+Symplified was built using React (JS), Tailwind CSS, Auth0, MUI, Flask, MongoDB, and the Gemini API. 
+
+We first started playing around with the Gemini API, prompting it to check if image recognition was possible for abrasions, and burns, while also 
+building out our key frontend features that served as the basis for our applications input (text-to-speech, survey, camera feature).
+
+With a fine tuned model, we then started building out our Doctor's Dashboard, which gives key insights into patients in the waiting room.
+
+Next we dove in to MongoDB, figuring out how to store our patients data. Concurrently we also integrated Auth0 for doctors, as patient data needs to be kept secure.
+
+We then created the frontend for patient profiles, giving AI powered insights into their symptoms and the risks they may be facing.
 
 # Challenges we ran into
 
