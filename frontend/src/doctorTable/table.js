@@ -80,48 +80,97 @@ export default function PatientDataTable() {
   }, []);
 
   const columns = [
-    { field: "name", headerName: "Patient Name", flex: 1 },
-    { field: "age", headerName: "Age", type: "number", flex: 0.5 },
-    { field: "bloodType", headerName: "Blood Type", flex: 0.7 },
-    { field: "waitTime", headerName: "Wait Time (min)", type: "number", flex: 1 },
-    { field: "severity", headerName: "Severity Score", type: "number", flex: 1 },
-    {
-      field: "actions",
-      headerName: "",
-      sortable: false,
-      filterable: false,
-      flex: 1,
-      renderCell: (params) => {
-        return (
-          <>
-            <div
-              style={{
+  { field: "name", headerName: "Patient Name", flex: 1 },
+  { field: "age", headerName: "Age", type: "number", flex: 0.5 },
+  { field: "bloodType", headerName: "Blood Type", flex: 0.7 },
+  { field: "waitTime", headerName: "Wait Time (min)", type: "number", flex: 1 },
+  {
+    field: "severity",
+    headerName: "Severity Score",
+    type: "number",
+    flex: 1,
+    renderCell: (params) => {
+      const value = params.value;
 
-                display: "flex",
-                justifyContent: "flex-end",
-                width: "100%",
-              }}
-            >
-              <IconButton
-                color='primary'
-                onClick={() => handleSeeFile(params.id)}
-                sx={{ mr: 1 }}
-              >
-                <DescriptionIcon />
-              </IconButton>
-              <IconButton
-                size="small"
-                color='error'
-                onClick={() => handleDelete(params.id)}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </div>
-          </>
-        );
-      },
+      // Clamp value between 1 and 10
+      const severity = Math.max(1, Math.min(10, value));
+
+      // Calculate gradient color from green (#4CAF50) to red (#F44336)
+      // We'll interpolate RGB values
+      const green = { r: 76, g: 175, b: 80 };   // #4CAF50
+      const red = { r: 244, g: 67, b: 54 };     // #F44336
+
+      const t = (severity - 1) / 9; // normalize 1-10 to 0-1
+
+      const r = Math.round(green.r + (red.r - green.r) * t);
+      const g = Math.round(green.g + (red.g - green.g) * t);
+      const b = Math.round(green.b + (red.b - green.b) * t);
+
+      const color = `rgb(${r}, ${g}, ${b})`;
+
+      return (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end", // right-aligned
+            alignItems: "center",       // vertically centered
+            height: "100%",
+            paddingRight: 8,
+          }}
+        >
+          <div
+            style={{
+              width: 30,
+              height: 30,
+              borderRadius: "50%",
+              backgroundColor: color,
+              color: "white",
+              fontWeight: "bold",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {value}
+          </div>
+        </div>
+      );
     },
-  ];
+  },
+  {
+    field: "actions",
+    headerName: "",
+    sortable: false,
+    filterable: false,
+    flex: 1,
+    renderCell: (params) => {
+      return (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            width: "100%",
+          }}
+        >
+          <IconButton
+            color="primary"
+            onClick={() => handleSeeFile(params.id)}
+            sx={{ mr: 1 }}
+          >
+            <DescriptionIcon />
+          </IconButton>
+          <IconButton
+            size="small"
+            color="error"
+            onClick={() => handleDelete(params.id)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </div>
+      );
+    },
+  },
+];
 
   return (
     <div className="doc">
@@ -148,24 +197,27 @@ export default function PatientDataTable() {
           sx={{
             borderRadius: "15px",
             boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px",
-            '& .MuiDataGrid-columnHeader': {
+
+            "& .MuiDataGrid-columnHeader": {
               backgroundColor: "white",
               color: "black",
               fontWeight: 900,
+              fontSize: "15px",
+              transition: "background-color 0.2s ease", // smooth grey hover
             },
             "& .MuiDataGrid-columnHeaderTitle": {
-              color: "black",
-              fontWeight: 900,
+              fontWeight: 900,   // locked in → no shifting
               fontSize: "15px",
+              color: "black",
             },
-            "& .MuiDataGrid-row:nth-of-type(odd)": {
-              backgroundColor: "#f7f7f7",
+
+            // ✅ subtle grey hover without moving text
+            "& .MuiDataGrid-columnHeader:hover": {
+              backgroundColor: "#f5f5f5",
             },
-            "& .MuiDataGrid-row:nth-of-type(even)": {
-              backgroundColor: "#ecedf2c2",
-            },
-            "& .MuiDataGrid-cell": {
-              color: "#333",
+
+            "& .MuiDataGrid-columnHeader:focus, & .MuiDataGrid-columnHeader:focus-within": {
+              outline: "none",
             },
           }}
         />
