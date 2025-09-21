@@ -28,7 +28,7 @@ export default function PatientFile() {
       // fetch all images
       if (fullPatient.image_ids && fullPatient.image_ids.length > 0) {
         Promise.all(fullPatient.image_ids.map(id => getImage(id)))
-          .then(urls => setImageUrls(urls.filter(Boolean)));
+          .then(urls => setImageUrls(urls.filter(Boolean))); // remove failed fetches
       }
     }
   }, []);
@@ -38,75 +38,65 @@ export default function PatientFile() {
   return (
     <div>
       <Header />
-      <Typography variant="h4" gutterBottom sx={{ mt: 2, ml: 2 }}>
-        Patient Details
+      <Typography variant="h4" gutterBottom sx={{ mt: '14vh', ml: 2 }}>
       </Typography>
 
-      <Grid container spacing={3} sx={{ p: 2 }}>
-        {/* First Row */}
-        <Grid container item xs={12} spacing={3}>
-          {/* Left: Personal Info + Contact Info */}
-          <Grid item xs={12} md={6} container spacing={3} direction="column">
-            <Grid item>
-              <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>Personal Info</Typography>
-                  <Table size="small">
-                    <TableBody>
-                      <TableRow><TableCell><strong>Age</strong></TableCell><TableCell>{patient.age}</TableCell></TableRow>
-                      <TableRow><TableCell><strong>Sex</strong></TableCell><TableCell>{patient.sex}</TableCell></TableRow>
-                      <TableRow><TableCell><strong>Blood Type</strong></TableCell><TableCell>{patient.blood_type}</TableCell></TableRow>
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item>
-              <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>Contact Info</Typography>
-                  <Table size="small">
-                    <TableBody>
-                      <TableRow><TableCell><strong>Email</strong></TableCell><TableCell>{patient.email}</TableCell></TableRow>
-                      <TableRow><TableCell><strong>Phone</strong></TableCell><TableCell>{patient.phone}</TableCell></TableRow>
-                      <TableRow><TableCell><strong>Emergency Phone</strong></TableCell><TableCell>{patient.emergency_phone}</TableCell></TableRow>
-                      <TableRow><TableCell><strong>Address</strong></TableCell><TableCell>{patient.address}</TableCell></TableRow>
-                      <TableRow><TableCell><strong>Insurance</strong></TableCell><TableCell>{patient.insurance}</TableCell></TableRow>
-                      <TableRow><TableCell><strong>Check-in</strong></TableCell><TableCell>{patient.checkin}</TableCell></TableRow>
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, mt: 2, flexWrap: 'wrap' }}>
+        <div className="flex flex-col gap-6" style={{ minWidth: 300 }}>
+          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>Personal Info</Typography>
+              <Table size="small">
+                <TableBody>
+                  <TableRow><TableCell><strong>Name</strong></TableCell><TableCell>{patient.name}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Age</strong></TableCell><TableCell>{patient.dob}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Sex</strong></TableCell><TableCell>{patient.sex}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Blood Type</strong></TableCell><TableCell>{patient.blood_type}</TableCell></TableRow>
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>Contact Info</Typography>
+              <Table size="small">
+                <TableBody>
+                  <TableRow><TableCell><strong>Email</strong></TableCell><TableCell>{patient.email}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Phone</strong></TableCell><TableCell>{patient.phone}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Emergency Phone</strong></TableCell><TableCell>{patient.emergency_phone}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Address</strong></TableCell><TableCell>{patient.address}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Insurance</strong></TableCell><TableCell>{patient.insurance}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Check-in</strong></TableCell><TableCell>{patient.checkin}</TableCell></TableRow>
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </div>
 
-          {/* Right: Uploaded Images */}
-          <Grid item xs={12} md={6}>
-            <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>Uploaded Images</Typography>
-                {imageUrls.length > 0 ? (
-                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                    {imageUrls.map((url, idx) => (
-                      <img
-                        key={idx}
-                        src={url}
-                        alt={`Patient upload ${idx + 1}`}
-                        style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "8px" }}
-                      />
-                    ))}
-                  </Box>
-                ) : (
-                  <Typography>No images uploaded</Typography>
-                )}
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+        <div style={{ minWidth: 300 }}>
+          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>Uploaded Images</Typography>
+              {imageUrls.length > 0 ? (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                  {imageUrls.map((url, idx) => (
+                    <img
+                      key={idx}
+                      src={url}
+                      alt={`Patient upload ${idx + 1}`}
+                      style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "8px" }}
+                    />
+                  ))}
+                </Box>
+              ) : (
+                <Typography>No images uploaded</Typography>
+              )}
+            </CardContent>
+          </Card>
+        </div>
 
-        {/* Second Row */}
-        <Grid item xs={12}>
-          <Card sx={{ borderRadius: 3, boxShadow: 3, bgcolor: "#f0f0f0" }}>
+        <div style={{ minWidth: 300 }}>
+          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>Reported Symptoms</Typography>
               <Typography sx={{ whiteSpace: "pre-wrap" }}>
@@ -114,19 +104,21 @@ export default function PatientFile() {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </div>
 
-        <Grid item xs={12}>
-          <Card sx={{ borderRadius: 3, boxShadow: 3, bgcolor: "#eaf2fb" }}>
+        <div style={{ minWidth: 300 }}>
+          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>Summary</Typography>
-              <Typography sx={{ whiteSpace: "pre-wrap", fontSize: "1rem" }}>
-                {patient.gemini_output || patient.audio_symptoms || "No summary available"}
+              <Typography sx={{ whiteSpace: "pre-wrap" }}>
+                {patient.gemini_output || patient.audio_symptoms || "No summary recorded"}
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
+        </div>
+      </Box>
+
+
     </div>
   );
 }
