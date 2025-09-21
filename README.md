@@ -12,7 +12,7 @@ Symplified collects basic information from users through a simple survey. Users 
 
 # How we built it
 
-# # Frontend
+## Frontend
 
 # Challenges we ran into
 
