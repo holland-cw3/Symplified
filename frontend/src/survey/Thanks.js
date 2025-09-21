@@ -25,7 +25,7 @@ export default function Thanks() {
             setShow(true);
             timeout = setTimeout(() => {
                 navigate('/');
-            }, 3000);
+            }, 15000);
         }
 
         return () => clearTimeout(timeout);

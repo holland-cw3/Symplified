@@ -12,6 +12,7 @@ from bson import ObjectId
 from urllib.parse import quote_plus
 from dotenv import load_dotenv
 import os
+import boto3
 
 
 load_dotenv()
@@ -29,8 +30,6 @@ mongoClient = MongoClient(mongo_uri)
 
 db = mongoClient["healthcare_app"]
 fs = GridFS(db)
-
-db.symptom_entries.update_many({}, {"$unset": {"firstName": "", "lastName": ""}})
 
 
 class ProcessInput(Resource):
@@ -85,20 +84,44 @@ class ProcessInput(Resource):
         # Create Gemini prompt
         prompt = (
             "You are a medical assistant.\n"
-            f"A patient reports the following symptoms:\n\n"
+            "A patient reports the following symptoms:\n\n"
             f"Description: {audio_symptoms}\n"
-            f"The patient has provided {len(image_ids)} images: \n\n"
-            "Analyze the patient's reported symptoms and provided images and return a list of identified symptoms in a comma separated format\n" \
-            "For example: 'runny nose, cut on finger, bruise on elbow'"
+            "Analyze the patient's reported symptoms and the provided images.\n"
+            "Return a **list of identified symptoms**, each with a **severity score from 1 to 10**, where 1 is minimal harm and 10 is life-threatening.\n"
+            "Use a **comma-separated format**, where each symptom is followed by its severity score in parentheses.\n"
+            "Example output: 'runny nose (2), cut on finger (2), bruise on elbow (1)'\n"
+            "Do not provide any treatment advice. Focus only on identifying symptoms and assigning severity.\n"
         )
+        if (len(image_parts) > 0):
+            prompt += f"The patient has provided these {len(image_parts)} images."
 
         # Get Gemini response
-        response = query_gemini([prompt] + image_parts)
+        response = query_gemini([prompt] + image_parts)["output"]
 
-        # Update Mongo entry with Gemini output
+        symptoms = []
+        max_severity = 0
+
+        for item in response.split(","):
+            item = item.strip()
+            if "(" in item and ")" in item:
+                # Split the symptom and severity
+                symptom_name = item[:item.rfind("(")].strip()
+                severity = int(item[item.rfind("(")+1:item.rfind(")")])
+                symptoms.append(symptom_name)
+                if severity > max_severity:
+                    max_severity = severity
+
+        symptom_string = ", ".join(symptoms)
+        print("Symptoms:", symptom_string)
+        print("Max severity:", max_severity)
+
+
         db.symptom_entries.update_one(
             {"_id": ObjectId(entryID)},
-            {"$set": {"gemini_output": response["output"]}}
+            {"$set": {
+                "gemini_output": symptom_string,
+                "max_severity": max_severity
+            }}
         )
 
         return jsonify({"response": response["output"]})

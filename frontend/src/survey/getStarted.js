@@ -6,7 +6,7 @@ import { Fade } from '@mui/material';
 
 
 const steps = [
-    'Hi!',
+    'Hello!',
     'Everything is Going to be Ok.',
     'Patient Screening'
 ];
