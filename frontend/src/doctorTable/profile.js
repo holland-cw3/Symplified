@@ -94,8 +94,13 @@ export default function PatientFile() {
         <Grid item xs={12} md={6}>
           <Card sx={{ borderRadius: 3, boxShadow: 3, bgcolor: "#eaf2fb" }}>
             <CardContent>
-              <Typography variant="h6" gutterBottom>Summary</Typography>
-              <Typography>{patient.gemini_output || patient.audio_symptoms || "No summary available"}</Typography>
+              <Typography variant="h6" gutterBottom>
+                Summary
+              </Typography>
+              <Typography>
+                {patient.professional_summary || "No symptoms recorded"}
+
+              </Typography>
             </CardContent>
           </Card>
         </Grid>

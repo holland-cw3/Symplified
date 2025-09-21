@@ -80,15 +80,18 @@ class ProcessInput(Resource):
             image_bytes = image_file.read()
             image_parts.append(types.Part.from_bytes(data=image_bytes, mime_type="image/jpeg"))
 
-        # Create Gemini prompt
+        # Create second Gemini prompt
         prompt = (
             "You are a medical assistant.\n"
             "A patient reports the following symptoms:\n\n"
             f"Description: {audio_symptoms}\n"
-            "Analyze the patient's reported symptoms and the provided images.\n"
+            "Write a paragraph summarizing the patient's condition. Use detailed medical"
+            "language but do not get too formal, keep it conversational."
+            "Additionally, analyze the patient's reported symptoms and the provided images.\n"
             "Return a **list of identified symptoms**, each with a **severity score from 1 to 10**, where 1 is minimal harm and 10 is life-threatening.\n"
             "Use a **comma-separated format**, where each symptom is followed by its severity score in parentheses.\n"
-            "Example output: 'runny nose (2), cut on finger (2), bruise on elbow (1)'\n"
+            "You **MUST** include 'SYMPTOMS:' before starting the list of identified symptoms."
+            "Example output: 'SYMPTOMS: runny nose (2), cut on finger (2), bruise on elbow (1)'\n"
             "Do not provide any treatment advice. Focus only on identifying symptoms and assigning severity.\n"
         )
         if (len(image_parts) > 0):
@@ -97,33 +100,41 @@ class ProcessInput(Resource):
         # Get Gemini response
         response = query_gemini([prompt] + image_parts)["output"]
 
-        symptoms = []
+        symptomList = []
         max_severity = 0
+        lst = response.split("SYMPTOMS: ")
+        professionalSummary = lst[0]
+        symptoms = lst[1]
 
-        for item in response.split(","):
+        
+
+        for item in symptoms.split(","):
             item = item.strip()
             if "(" in item and ")" in item:
                 # Split the symptom and severity
                 symptom_name = item[:item.rfind("(")].strip()
                 severity = int(item[item.rfind("(")+1:item.rfind(")")])
-                symptoms.append(symptom_name)
+                symptomList.append(symptom_name)
                 if severity > max_severity:
                     max_severity = severity
 
-        symptom_string = ", ".join(symptoms)
-        print("Symptoms:", symptom_string)
-        print("Max severity:", max_severity)
+        symptom_string = ", ".join(symptomList)
+
+        print(professionalSummary)
+        print(symptom_string)
+        print(max_severity)
 
 
         db.symptom_entries.update_one(
             {"_id": ObjectId(entryID)},
             {"$set": {
                 "gemini_output": symptom_string,
-                "max_severity": max_severity
+                "max_severity": max_severity,
+                "professional_summary": professionalSummary
             }}
         )
 
-        return jsonify({"response": response["output"]})
+        return jsonify({"response": response})
 
 class GetAllEntries(Resource):
     def get(self):
