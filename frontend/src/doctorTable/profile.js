@@ -49,7 +49,7 @@ export default function PatientFile() {
               <Table size="small">
                 <TableBody>
                   <TableRow><TableCell><strong>Name</strong></TableCell><TableCell>{patient.name}</TableCell></TableRow>
-                  <TableRow><TableCell><strong>Age</strong></TableCell><TableCell>{patient.dob}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Age</strong></TableCell><TableCell>{patient.age}</TableCell></TableRow>
                   <TableRow><TableCell><strong>Sex</strong></TableCell><TableCell>{patient.sex}</TableCell></TableRow>
                   <TableRow><TableCell><strong>Blood Type</strong></TableCell><TableCell>{patient.blood_type}</TableCell></TableRow>
                 </TableBody>

@@ -50,11 +50,7 @@ export default function PatientDataTable() {
       const result = await getData();
 
       const mappedData = result.map((patient, index) => {
-        const dob = new Date(patient.dob);
-        const today = new Date();
-
-        const age = today.getFullYear() - dob.getFullYear();
-
+    
         let waitTime = 0;
         if (patient.checkin) {
           const checkinTime = new Date(patient.checkin);
@@ -65,7 +61,7 @@ export default function PatientDataTable() {
         return {
           id: patient._id || index,
           name: patient.name,
-          age: age,
+          age: patient.dob,
           bloodType: patient.blood_type,
           waitTime: waitTime,
           severity: patient.max_severity || 0,
