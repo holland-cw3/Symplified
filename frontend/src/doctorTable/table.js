@@ -51,9 +51,9 @@ export default function PatientDataTable() {
 
       const mappedData = result.map((patient, index) => {
         const dob = new Date(patient.dob);
-        const ageDifMs = Date.now() - dob.getTime();
-        const ageDate = new Date(ageDifMs);
-        const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+        const today = new Date();
+
+        const age = today.getFullYear() - dob.getFullYear();
 
         let waitTime = 0;
         if (patient.checkin) {
@@ -96,7 +96,7 @@ export default function PatientDataTable() {
           <>
             <div
               style={{
-               
+
                 display: "flex",
                 justifyContent: "flex-end",
                 width: "100%",
@@ -125,7 +125,7 @@ export default function PatientDataTable() {
 
   return (
     <div className="doc">
-      <Header/>
+      <Header />
       <div
         style={{
           height: "85vh",

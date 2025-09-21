@@ -6,4 +6,3 @@ datetime
 python-dotenv
 flask_cors
 flask_restful
-boto3

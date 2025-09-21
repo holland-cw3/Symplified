@@ -12,7 +12,6 @@ from bson import ObjectId
 from urllib.parse import quote_plus
 from dotenv import load_dotenv
 import os
-import boto3
 
 
 load_dotenv()
