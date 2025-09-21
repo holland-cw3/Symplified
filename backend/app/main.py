@@ -134,7 +134,7 @@ class ProcessInput(Resource):
             }}
         )
 
-        print(symptom_string)
+        print(symptom_string) 
         print(max_severity)
         print(professionalSummary)
 
