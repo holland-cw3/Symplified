@@ -32,7 +32,8 @@ One of our biggest challenges was finding the right prompt to feed into Gemini. 
 
 Abhyuday Srivatsa: I focused on developing Symplified's backend. I was able to improve on my skills with Python in general, but more specifically with Flask and API routing. I enjoyed bridging communication pipelines between our React frontend, Flask backend, and Mongo database. Lastly, I learnt a lot about prompt engineering and how to steer LLM's in the right direction
 
-Caleb Holland,
+Caleb Holland: I focused on developing Symplified's frontend, and also did a bit of work with a little bit of everything. I continued to improve my ReactJS skills. And learned a bit about what it was like to not meet my standards for a UI. This was a challenge, and a life lesson. I look forward to continuing to learn!
+
 
 # What's next for Symplified
 
