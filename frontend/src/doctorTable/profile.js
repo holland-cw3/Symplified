@@ -106,7 +106,7 @@ export default function PatientFile() {
           </Card>
         </div>
 
-        <div style={{ minWidth: 300 }}>
+        <div style={{ minWidth: 270 }}>
           <Card sx={{ borderRadius: 3, boxShadow: 3, minHeight:'215px' }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>
@@ -131,7 +131,7 @@ export default function PatientFile() {
           </Card>
         </div>
 
-        <div style={{ minWidth: 300 }}>
+        <div style={{ minWidth: 270 }}>
           <Card sx={{ borderRadius: 3, boxShadow: 3, minHeight:'215px' }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>Summary</Typography>
