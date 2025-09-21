@@ -41,7 +41,7 @@ export default function PatientFile() {
       </Typography>
 
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, mt: 2 }}>
-        <div className="flex flex-col gap-8" style={{ minWidth: 300 }}>
+        <div className="flex flex-col gap-8" style={{ minWidth: 450 }}>
           <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>Personal Info</Typography>
@@ -72,7 +72,7 @@ export default function PatientFile() {
           </Card>
         </div>
 
-        <div style={{ minWidth: 300 }}>
+        <div style={{ minWidth: 270 }}>
           <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>Uploaded Images</Typography>
