@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Start from './survey/getStarted.js';
+import Survey from './survey/basicInfo.js';
 import Symptoms from './survey/Symptoms.js';
 import Camera from './survey/Camera.js';
 import Audio from './survey/Audio.js';
@@ -13,8 +14,6 @@ import LoginScreen from './doctorTable/login.js'
 
 import { Navigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-
-import BasicInfo from './survey/basicInfo.js'
 
 
 function ProtectedRoute({ children }) {
