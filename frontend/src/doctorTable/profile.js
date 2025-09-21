@@ -1,64 +1,30 @@
-import './doc.css';
-import Button from '@mui/material/Button';
-import img from './image.png';
-import Typography from '@mui/material/Typography';
+import { useEffect, useState } from "react";
 
-function PatientCard() {
-  return (
-    <div className='card'>
-      <img src={img} sx={{ height: 10 }}></img>
-      <table>
-        <thead>
-          <tr><th>Patient Name</th><th>Wait Time</th><th>Severity Score</th><th></th><th></th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Caleb Holland</td><td>1 hr 20 min</td><td>7/10</td><td><Button variant='contained'>See File</Button></td> <td><Button variant='contained' color='error'>X</Button></td></tr>
-          <tr><td>Caleb Holland</td><td>1 hr 20 min</td><td>7/10</td><td><Button variant='contained'>See File</Button></td></tr>
-          <tr><td>Caleb Holland</td><td>1 hr 20 min</td><td>7/10</td><td><Button variant='contained'>See File</Button></td></tr>
+export default function PatientFile() {
+  const [patient, setPatient] = useState(null);
 
-        </tbody>
-      </table>
-    </div>
+  useEffect(() => {
+    const storedPatient = sessionStorage.getItem("selectedPatient");
+    if (storedPatient) {
+      setPatient(JSON.parse(storedPatient));
+    }
+  }, []);
 
-
-
-
-  );
-}
-
-
-
-function SeverityCard({sev}) {
-  return (
-    <div className='card'>
-      <Typography variant='h6' sx={{fontWeight:'bold'}}>Severity {sev}/10</Typography>
-
-    </div>
-  )
-
-}
-
-
-
-export default function Table() {
-  const severities = Array.from({ length: 10 }, (_, i) => 10 - i);
+  if (!patient) return <div>Loading...</div>;
 
   return (
-    <div className='doc'>
-
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(5, 1fr)",
-        gap: "10px",
-        width: "95%",
-      }}
-    >
-      {severities.map((sev) => (
-        <SeverityCard key={sev} sev={sev} />
-      ))}
+    <div>
+      <h2>{patient.name}'s File</h2>
+      <p>Age: {patient.age}</p>
+      <p>Blood Type: {patient.bloodType}</p>
+      <p>Wait Time: {patient.waitTime} min</p>
+      <p>Severity: {patient.severity}</p>
+      <p>Email: {patient.email}</p>
+      <p>Phone: {patient.phone}</p>
+      <p>Insurance: {patient.insurance}</p>
+      <p>Address: {patient.address}</p>
+      <p>Check-in: {patient.checkin}</p>
+      <p>Symptoms: {patient.gemini_output || patient.audio_symptoms}</p>
     </div>
-        </div>
-
   );
 }

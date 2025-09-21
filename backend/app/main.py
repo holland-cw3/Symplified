@@ -101,7 +101,34 @@ class ProcessInput(Resource):
 
         return jsonify({"response": response["output"]})
 
-# Add resource to API
+class GetAllEntries(Resource):
+    def get(self):
+        entries = list(db.symptom_entries.find())
+        
+        for entry in entries:
+            entry["_id"] = str(entry["_id"])
+            if "image_ids" in entry:
+                entry["image_ids"] = [str(fid) for fid in entry["image_ids"]]
+
+        return jsonify(entries)
+
+
+class DeleteEntry(Resource):
+    def delete(self, entry_id):
+        try:
+            result = db.symptom_entries.delete_one({"_id": ObjectId(entry_id)})
+            if result.deleted_count == 0:
+                return jsonify({"success": False, "message": "Entry not found"})
+            return jsonify({"success": True, "message": "Entry deleted"})
+        except Exception as e:
+            return jsonify({"success": False, "message": str(e)})
+
+
+
+
+
+api.add_resource(GetAllEntries, "/entries")
+api.add_resource(DeleteEntry, "/entries/<string:entry_id>")
 api.add_resource(ProcessInput, "/process")
 
 if __name__ == "__main__":

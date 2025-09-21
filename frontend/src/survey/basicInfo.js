@@ -77,22 +77,18 @@ export default function PatientInfo() {
 
             {/* Form Fields */}
             <Fade in={showFields} timeout={500}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4vh', width: '100%', maxWidth: '1000px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4vh', width: '100%', maxWidth: '1200px', backgroundColor:'white', padding: '2vw', borderRadius:"15px", boxShadow: 'rgba(0, 0, 0, 0.4) 0px 3px 8px' }}>
                     
                     {/* Row 1: Name */}
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div style={rowStyle}>
                         <TextField
                             label="Name"
                             variant="outlined"
                             value={formData.name}
                             onChange={(e) => handleChange('name', e.target.value)}
                             fullWidth
-                            sx={{ maxWidth: '400px' }}
+                            sx={{ flex: 1 }}
                         />
-                    </div>
-
-                    {/* Row 2: Sex, DOB, Address, Blood Type */}
-                    <div style={rowStyle}>
                         <TextField
                             label="Sex"
                             variant="outlined"
@@ -108,6 +104,12 @@ export default function PatientInfo() {
                             onChange={(e) => handleChange('dob', e.target.value)}
                             sx={{ flex: 1 }}
                         />
+                       
+                         
+                    </div>
+
+                    {/* Row 2: Sex, DOB, Address, Blood Type */}
+                    <div style={rowStyle}>
                         <TextField
                             label="Blood Type"
                             variant="outlined"
@@ -122,17 +124,12 @@ export default function PatientInfo() {
                             onChange={(e) => handleChange('insurance', e.target.value)}
                             sx={{ flex: 1 }}
                         />
+                        
                     </div>
+                    <hr/>
 
                     {/* Row 3: Phone, Email, Insurance, Emergency Contact Phone */}
                     <div style={rowStyle}>
-                        <TextField
-                            label="Phone Number"
-                            variant="outlined"
-                            value={formData.phone}
-                            onChange={(e) => handleChange('phone', e.target.value)}
-                            sx={{ flex: 1 }}
-                        />
                         <TextField
                             label="Email"
                             type="email"
