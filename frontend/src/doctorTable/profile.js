@@ -35,7 +35,7 @@ export default function PatientFile() {
   if (!patient) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div className='doc'>
       <Header />
       <Typography variant="h4" gutterBottom sx={{ mt: '14vh', ml: 2 }}>
       </Typography>
