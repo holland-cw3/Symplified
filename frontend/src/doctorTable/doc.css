@@ -6,6 +6,7 @@
     text-align: center;
     min-height: 100vh;
     width: 100%;
+    background-color: rgba(132, 163, 220, 0.89);
    
     background-image: 
     radial-gradient(circle, rgba(132, 163, 220, 0.89) 0%, rgba(70, 110, 180, 0.89) 100%),
