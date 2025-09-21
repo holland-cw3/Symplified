@@ -44,38 +44,42 @@ export default function LoginScreen() {
 
   return (
     <div className="getStarted">
-      <Fade in={show} timeout={500}>
-          <Typography sx={{ 'fontWeight': 'bold', 'fontSize': '32px', textShadow: '3px 3px 2px rgba(13, 62, 100, 0.3)' }} >
-              {steps[index]}
-          </Typography>
-      </Fade>
+      
 
       {startButton && (
         !isAuthenticated ? (
-          <Button
-            style={{ marginTop: 20 }}
-            variant="contained"
-            onClick={() =>
-              loginWithRedirect({
-                authorizationParams: { redirect_uri: window.location.origin + "/doctor" },
-              })
-            }
-          >
-            Log In
-          </Button>
-        ) : (
-          <>
-            <p>Welcome, {user.name}</p>
-            <Button
-              variant="contained"
-              onClick={() =>
-                logout({ returnTo: window.location.origin + "/doctorlogin" })
-              }
-            >
-              Log Out
-            </Button>
-          </>
-        )
+          <Fade in={show} timeout={500}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Typography
+                sx={{
+                  fontWeight: 'bold',
+                  fontSize: '32px',
+                  textShadow: '3px 3px 2px rgba(13, 62, 100, 0.3)',
+                  textAlign: 'center',
+                }}
+              >
+                {steps[index]}
+              </Typography>
+
+              <Button
+                style={{ marginTop: 20 }}
+                variant="contained"
+                onClick={() =>
+                  loginWithRedirect({
+                    authorizationParams: { redirect_uri: window.location.origin + "/doctor" },
+                  })
+                }
+              >
+                Log In
+              </Button>
+            </div>
+          </Fade>
+        ) : 
+          <Fade in={show} timeout={500}>
+            <Typography sx={{ 'fontWeight': 'bold', 'fontSize': '32px', textShadow: '3px 3px 2px rgba(13, 62, 100, 0.3)' }} >
+                Unable to Authenticate
+            </Typography>
+          </Fade>
       )}
     </div>
   );

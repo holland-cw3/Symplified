@@ -120,10 +120,6 @@ class ProcessInput(Resource):
 
         symptom_string = ", ".join(symptomList)
 
-        print(professionalSummary)
-        print(symptom_string)
-        print(max_severity)
-
 
         db.symptom_entries.update_one(
             {"_id": ObjectId(entryID)},
