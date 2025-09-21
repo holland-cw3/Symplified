@@ -37,7 +37,7 @@ export default function Thanks() {
     useEffect(() => {
         if (!show && index < steps.length - 1) {
             const timeout = setTimeout(() => {
-                setIndex(index + 1);
+                setIndex(index + 1); 
                 setShow(true);
             }, 1000);
             return () => clearTimeout(timeout);
