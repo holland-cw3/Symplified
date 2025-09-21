@@ -124,8 +124,8 @@ export default function PatientFile() {
           <Card sx={{ borderRadius: 3, boxShadow: 3, minHeight:'215px' }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>Summary</Typography>
-              <Typography sx={{ whiteSpace: "pre-wrap" }}>
-                {patient.gemini_output || patient.audio_symptoms || "No summary recorded"}
+              <Typography sx={{ whiteSpace: "pre-wrap", fontSize: "1rem" }}>
+                {patient.professional_summary || "No summary available"}
               </Typography>
             </CardContent>
           </Card>
