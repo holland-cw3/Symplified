@@ -12,41 +12,12 @@ const steps = [
 
 export default function LoginScreen() {
   const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
-  const [index, setIndex] = useState(0);
-  const [startButton, setStartButton] = useState(false);
-  const [show, setShow] = useState(true);
   
-  
-  useEffect(() => {
-      if (index < steps.length - 1) {
-          const timeout = setTimeout(() => {
-              setShow(false);
-          }, 1500);
-          return () => clearTimeout(timeout);
-      } else {
-          setShow(true);
-          setStartButton(true);
-      }
-  }, [index]);
-  
-  useEffect(() => {
-      if (!show && index < steps.length - 1) {
-          const timeout = setTimeout(() => {
-              setIndex(index + 1);
-              setShow(true);
-          }, 1000);
-          return () => clearTimeout(timeout);
-      }
-      if (index === steps.length - 1) {
-          setStartButton(true);
-      }
-  }, [show, index]);
-
+  let show = true
+  console.log(isAuthenticated)
   return (
     <div className="getStarted">
-      
-
-      {startButton && (
+      {(
         !isAuthenticated ? (
           <Fade in={show} timeout={500}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -58,7 +29,7 @@ export default function LoginScreen() {
                   textAlign: 'center',
                 }}
               >
-                {steps[index]}
+                Doctor Login
               </Typography>
 
               <Button
