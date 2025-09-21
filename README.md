@@ -50,6 +50,8 @@ Patient File
 Data Entry
 <img width="1184" height="765" alt="Screenshot 2025-09-21 at 6 26 32 AM" src="https://github.com/user-attachments/assets/0155441f-6726-4014-8d8c-77a52f69d189" />
 
+Survey Intro
+<img width="1904" height="887" alt="image" src="https://github.com/user-attachments/assets/b32a89d9-f0c0-4902-8a49-2b588b88d9ab" />
 
 
 
