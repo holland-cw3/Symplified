@@ -32,7 +32,6 @@ export default function App() {
       <Route path='/' element={<Start/>}></Route>
       <Route path='/symptoms' element={<Symptoms/>}></Route>
       <Route path='/camera' element={<Camera/>}></Route>
-
       <Route path='/moresymptoms' element={<More/>}></Route>
       <Route path='/thanks' element={<Thanks/>}></Route>
       <Route path='/basics' element={<BasicInfo/>}></Route>

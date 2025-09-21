@@ -39,11 +39,11 @@ async function submit(){
     fields.forEach(field => {
         const value = localStorage.getItem(field);
         if (value) {
-            formData.append(field.toLowerCase(), value); // key in lowercase
+            formData.append(field.toLowerCase(), value); 
         }
     });
 
-    const capturedImageBase64 = localStorage.getItem("capturedImage");
+    const capturedImageBase64 = localStorage.getItem("IMAGESYMPTOMS");
     if (capturedImageBase64) {
         const blob = base64ToBlob(capturedImageBase64);
         formData.append("symptomImages", blob, "captured.jpg");

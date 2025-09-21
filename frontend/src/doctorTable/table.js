@@ -68,7 +68,7 @@ export default function PatientDataTable() {
           age: age,
           bloodType: patient.blood_type,
           waitTime: waitTime,
-          severity: patient.severity || 0,
+          severity: patient.max_severity || 0,
           fullPatient: patient
         };
       });
