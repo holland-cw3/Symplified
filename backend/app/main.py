@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file, abort
+from flask import Flask, request, jsonify, send_file, abort, Response
 import io
 import gridfs
 from flask_restful import Api, Resource
@@ -137,10 +137,10 @@ class GetImage(Resource):
     def get(self, image_id):
         try:
             file_data = fs.get(ObjectId(image_id))
-            return send_file(
-                io.BytesIO(file_data.read()),  # convert GridOut to bytes
-                attachment_filename=file_data.filename,
-                mimetype='image/jpeg'          # adjust if some images are png/gif
+            return Response(
+                file_data.read(),
+                mimetype='image/jpeg',
+                headers={"Content-Disposition": f"inline; filename={file_data.filename}"}
             )
         except gridfs.errors.NoFile:
             abort(404, description="Image not found")
