@@ -46,6 +46,7 @@ Doctor View
 Patient File
 <img width="1918" height="885" alt="image" src="https://github.com/user-attachments/assets/70e5a8c1-9f7b-439e-9de8-a5784eb03526" />
 
+<img width="1184" height="765" alt="Screenshot 2025-09-21 at 6 26 32 AM" src="https://github.com/user-attachments/assets/0155441f-6726-4014-8d8c-77a52f69d189" />
 
 
 
