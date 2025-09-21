@@ -2,9 +2,12 @@ import { Typography, Button } from "@mui/material"
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from "../logo.png"
 import './doc.css';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function(){
       const { logout, user } = useAuth0();
+      const navigate = useNavigate();
 
     return(
          <div className="header">
@@ -18,7 +21,8 @@ export default function(){
               <img
                 src={logo}
                 alt="Symplified Logo"
-                style={{ height: "55px", objectFit: "contain" }}
+                style={{ height: "55px", objectFit: "contain", cursor: "pointer" }}
+                onClick={() => navigate("/doctor")}
               />
             </div>
 
