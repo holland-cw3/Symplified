@@ -134,6 +134,10 @@ class ProcessInput(Resource):
             }}
         )
 
+        print(symptom_string)
+        print(max_severity)
+        print(professionalSummary)
+
         return jsonify({"response": response})
 
 class GetAllEntries(Resource):

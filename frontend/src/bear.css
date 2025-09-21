@@ -1,0 +1,9 @@
+.bear {
+  position: fixed;
+  bottom: 0px;
+  width: 125px;
+  height: auto;
+  pointer-events: none;
+  z-index: 9999; /* always on top */
+  transform-origin: bottom center; /* tilt around feet */
+}
