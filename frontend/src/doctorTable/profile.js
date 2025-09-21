@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Header from "./header";
-import { Card, CardContent, Typography, Grid, Box } from "@mui/material";
+import { Card, CardContent, Typography, Grid, Box, Table, TableBody, TableCell, TableRow } from "@mui/material";
 
-async function getImage(imageId){
+async function getImage(imageId) {
   try {
     const response = await fetch(`http://127.0.0.1:5000/image/${imageId}`);
     if (!response.ok) throw new Error("Image fetch failed");
@@ -39,28 +39,46 @@ export default function PatientFile() {
     <div>
       <Header />
       <Typography variant="h4" gutterBottom sx={{ mt: 2, ml: 2 }}>
-        Dashboard
+        Patient Details
       </Typography>
 
       <Grid container spacing={3} sx={{ p: 2 }}>
-        <Grid item xs={12} md={8}>
+        {/* Personal Info */}
+        <Grid item xs={12} md={6}>
           <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
             <CardContent>
-              <Typography variant="h6" gutterBottom>Personal Information</Typography>
-              <Typography><strong>Age:</strong> {patient.age}</Typography>
-              <Typography><strong>Blood Type:</strong> {patient.blood_type}</Typography>
-              <Typography><strong>Email:</strong> {patient.email}</Typography>
-              <Typography><strong>Phone:</strong> {patient.phone}</Typography>
-              <Typography><strong>Emergency Phone:</strong> {patient.emergency_phone}</Typography>
-              <Typography><strong>Insurance:</strong> {patient.insurance}</Typography>
-              <Typography><strong>Address:</strong> {patient.address}</Typography>
-              <Typography><strong>Check-in:</strong> {patient.checkin}</Typography>
-              <Typography><strong>Sex:</strong> {patient.sex}</Typography>
+              <Typography variant="h6" gutterBottom>Personal Info</Typography>
+              <Table size="small">
+                <TableBody>
+                  <TableRow><TableCell><strong>Age</strong></TableCell><TableCell>{patient.age}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Sex</strong></TableCell><TableCell>{patient.sex}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Blood Type</strong></TableCell><TableCell>{patient.blood_type}</TableCell></TableRow>
+                </TableBody>
+              </Table>
             </CardContent>
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={6}>
+          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>Contact Info</Typography>
+              <Table size="small">
+                <TableBody>
+                  <TableRow><TableCell><strong>Email</strong></TableCell><TableCell>{patient.email}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Phone</strong></TableCell><TableCell>{patient.phone}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Emergency Phone</strong></TableCell><TableCell>{patient.emergency_phone}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Address</strong></TableCell><TableCell>{patient.address}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Insurance</strong></TableCell><TableCell>{patient.insurance}</TableCell></TableRow>
+                  <TableRow><TableCell><strong>Check-in</strong></TableCell><TableCell>{patient.checkin}</TableCell></TableRow>
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Uploaded Images */}
+        <Grid item xs={12}>
           <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>Uploaded Images</Typography>
@@ -82,20 +100,26 @@ export default function PatientFile() {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={6}>
-          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
+        {/* Reported Symptoms */}
+        <Grid item xs={12}>
+          <Card sx={{ borderRadius: 3, boxShadow: 3, bgcolor: "#f0f0f0" }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>Reported Symptoms</Typography>
-              <Typography>{patient.gemini_output || patient.audio_symptoms || "No symptoms recorded"}</Typography>
+              <Typography sx={{ whiteSpace: "pre-wrap" }}>
+                {patient.gemini_output || patient.audio_symptoms || "No symptoms recorded"}
+              </Typography>
             </CardContent>
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        {/* Summary */}
+        <Grid item xs={12}>
           <Card sx={{ borderRadius: 3, boxShadow: 3, bgcolor: "#eaf2fb" }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>Summary</Typography>
-              <Typography>{patient.gemini_output || patient.audio_symptoms || "No summary available"}</Typography>
+              <Typography sx={{ whiteSpace: "pre-wrap", fontSize: "1rem" }}>
+                {patient.gemini_output || patient.audio_symptoms || "No summary available"}
+              </Typography>
             </CardContent>
           </Card>
         </Grid>
