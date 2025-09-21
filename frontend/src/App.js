@@ -43,7 +43,7 @@ export default function App() {
       <Route path='/thanks' element={<Thanks/>}></Route>
       <Route path='/basics' element={<BasicInfo/>}></Route>
 
-      {/* <Route path='/doctorlogin' element={<LoginScreen/>}></Route>
+      <Route path='/doctorlogin' element={<LoginScreen/>}></Route>
       <Route path='/doctor' element={
           <ProtectedRoute>
             <Doctor />
@@ -56,7 +56,7 @@ export default function App() {
             <PatientFile />
           </ProtectedRoute>
         } 
-      /> */}
+      />
 
       <Route path='/doctor' element={<Doctor/>}></Route>
       <Route path='/patientfile' element={<PatientFile/>}></Route>
