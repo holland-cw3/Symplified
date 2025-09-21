@@ -50,14 +50,11 @@ async function submit(){
     }
 
     try {
-        console.log(formData)
         const response = await fetch("http://127.0.0.1:5000/process", {
             method: "POST",
             body: formData,
         });
 
-        const data = await response.json();
-        console.log("Gemini response:", data);
         localStorage.clear();
     } catch (err) {
         console.error("Error submitting data:", err);

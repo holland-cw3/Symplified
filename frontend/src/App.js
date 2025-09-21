@@ -35,7 +35,7 @@ export default function App() {
 
       <Route path='/moresymptoms' element={<More/>}></Route>
       <Route path='/thanks' element={<Thanks/>}></Route>
-      <Route path='/basics' element={<BasicInfo/>}></Route>
+      <Route path='/basics' element={<Survey/>}></Route>
 
       <Route path='/doctorlogin' element={<LoginScreen/>}></Route>
       {/* { <Route path='/doctor' element={

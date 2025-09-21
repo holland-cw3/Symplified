@@ -16,7 +16,7 @@ export default function Symptoms() {
     useEffect(() => {
         const name = localStorage.getItem('NAME') || 'Guest';
         setSteps([
-            `Hi ${name}!`,
+            `Hi, ${name}!`,
             'What Brings You In Today?',
         ]);
     }, []);
