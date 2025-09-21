@@ -45,6 +45,7 @@ class ProcessInput(Resource):
         audio_symptoms = request.form.get("audiosymptoms")
         checkin = request.form.get("checkin") or datetime.now().isoformat()
 
+
         #collect image files
         image_files = request.files.getlist("symptomImages")
         image_ids = []
@@ -80,6 +81,7 @@ class ProcessInput(Resource):
             image_bytes = image_file.read()
             image_parts.append(types.Part.from_bytes(data=image_bytes, mime_type="image/jpeg"))
 
+
         # Create second Gemini prompt
         prompt = (
             "You are a medical assistant.\n"
@@ -99,6 +101,8 @@ class ProcessInput(Resource):
 
         # Get Gemini response
         response = query_gemini([prompt] + image_parts)["output"]
+
+        print(response)
 
         symptomList = []
         max_severity = 0

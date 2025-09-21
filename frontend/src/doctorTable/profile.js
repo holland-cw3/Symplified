@@ -40,7 +40,7 @@ export default function PatientFile() {
       <Typography variant="h4" gutterBottom sx={{ mt: '14vh', ml: 2 }}>
       </Typography>
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, mt: 2, ml: 2, mr: 2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, marginTop: 2, marginLeft: 2, marginRight: 2 }}>
         <div className="flex flex-col gap-8" style={{ minWidth: 450 }}>
           <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
             <CardContent>
