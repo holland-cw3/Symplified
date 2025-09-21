@@ -37,6 +37,17 @@ Caleb Holland,
 # What's next for Symplified
 
 
-# Screenshots
+# Screenshots (Graphic Image Warning)
+
+
+Doctor View
+<img width="1908" height="884" alt="image" src="https://github.com/user-attachments/assets/61557bd4-3c59-43b3-90d6-c9a810cabf38" />
+
+Patient File
+<img width="1918" height="885" alt="image" src="https://github.com/user-attachments/assets/70e5a8c1-9f7b-439e-9de8-a5784eb03526" />
+
+
+
+
 
 
