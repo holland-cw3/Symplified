@@ -19,7 +19,7 @@ function base64ToBlob(base64, mimeType = "image/jpeg") {
     return new Blob([byteArray], { type: mimeType });
 }
 
-async function submit(){
+async function submit() {
     const formData = new FormData();
 
     const fields = [
@@ -39,15 +39,16 @@ async function submit(){
     fields.forEach(field => {
         const value = localStorage.getItem(field);
         if (value) {
-            formData.append(field.toLowerCase(), value); 
+            formData.append(field.toLowerCase(), value);
         }
     });
 
-    const capturedImageBase64 = localStorage.getItem("IMAGESYMPTOMS");
-    if (capturedImageBase64) {
-        const blob = base64ToBlob(capturedImageBase64);
-        formData.append("symptomImages", blob, "captured.jpg");
-    }
+    const capturedImages = JSON.parse(localStorage.getItem("IMAGESYMPTOMS") || "[]");
+
+    capturedImages.forEach((imgBase64, index) => {
+        const blob = base64ToBlob(imgBase64);
+        formData.append("symptomImages", blob, `captured_${index}.jpg`);
+    });
 
     try {
         const response = await fetch("http://127.0.0.1:5000/process", {
@@ -101,20 +102,20 @@ export default function MoreSymptoms() {
             {startButton && (
                 <div style={{ marginTop: '3vh', display: 'flex', flexDirection: 'row', gap: '1vw' }}>
                     <Fade in={show} timeout={500}>
-                        <a href="/audio" style={{ textDecoration: 'none' }}>
+                        <a href="/camera" style={{ textDecoration: 'none' }}>
                             <Button variant="contained" sx={{ marginTop: '3vh' }}>
                                 Yes
                             </Button>
                         </a>
                     </Fade>
-                    
+
                     <Fade in={show} timeout={500}>
                         <a href="/thanks" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" sx={{ marginTop: '3vh' }} 
-                            onClick={async () => {
-                                await submit();    
-                                window.location.href = "/thanks"; 
-                            }}>
+                            <Button variant="contained" sx={{ marginTop: '3vh' }}
+                                onClick={async () => {
+                                    await submit();
+                                    window.location.href = "/thanks";
+                                }}>
                                 No
                             </Button>
                         </a>

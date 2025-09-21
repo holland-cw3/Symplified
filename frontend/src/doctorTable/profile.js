@@ -25,10 +25,9 @@ export default function PatientFile() {
       const fullPatient = parsed.fullPatient || parsed;
       setPatient(fullPatient);
 
-      // fetch all images
       if (fullPatient.image_ids && fullPatient.image_ids.length > 0) {
         Promise.all(fullPatient.image_ids.map(id => getImage(id)))
-          .then(urls => setImageUrls(urls.filter(Boolean))); // remove failed fetches
+          .then(urls => setImageUrls(urls.filter(Boolean)));
       }
     }
   }, []);
@@ -41,7 +40,7 @@ export default function PatientFile() {
       <Typography variant="h4" gutterBottom sx={{ mt: '14vh', ml: 2 }}>
       </Typography>
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, mt: 2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, mt: 2, width: '90%'}}>
         <div className="flex flex-col gap-8" style={{ minWidth: 300 }}>
           <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
             <CardContent>
@@ -73,30 +72,30 @@ export default function PatientFile() {
           </Card>
         </div>
 
-        <div style={{ minWidth: 300 }}>
-          <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>Uploaded Images</Typography>
-              {imageUrls.length > 0 ? (
-                <Box sx={{ display: "flex", flexDirection: 'column', flexWrap: "wrap", gap: 1 }}>
-                  {imageUrls.map((url, idx) => (
-                    <img
-                      key={idx}
-                      src={url}
-                      alt={`Patient upload ${idx + 1}`}
-                      style={{ width: "100px", height: "134px", objectFit: "cover", borderRadius: "8px" }}
-                    />
-                  ))}
-                </Box>
-              ) : (
-                <Typography>No images uploaded</Typography>
-              )}
-            </CardContent>
-          </Card>
-        </div>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)", 
+            gap: 1,
+          }}
+        >
+          {imageUrls.map((url, idx) => (
+            <img
+              key={idx}
+              src={url}
+              alt={`Patient upload ${idx + 1}`}
+              style={{
+                width: "100%",
+                height: "134px",
+                objectFit: "cover",
+                borderRadius: "8px",
+              }}
+            />
+          ))}
+        </Box>
 
         <div style={{ minWidth: 300 }}>
-          <Card sx={{ borderRadius: 3, boxShadow: 3, minHeight:'215px' }}>
+          <Card sx={{ borderRadius: 3, boxShadow: 3, minHeight: '215px' }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Reported Symptoms
@@ -121,7 +120,7 @@ export default function PatientFile() {
         </div>
 
         <div style={{ minWidth: 300 }}>
-          <Card sx={{ borderRadius: 3, boxShadow: 3, minHeight:'215px' }}>
+          <Card sx={{ borderRadius: 3, boxShadow: 3, minHeight: '215px' }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>Summary</Typography>
               <Typography sx={{ whiteSpace: "pre-wrap", fontSize: "1rem" }}>

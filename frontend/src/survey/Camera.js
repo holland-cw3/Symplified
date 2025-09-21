@@ -46,7 +46,17 @@ export default function AudioCameraCombined() {
       alert("Please provide both audio and image before submitting.");
       return;
     }
-    localStorage.setItem("IMAGESYMPTOMS", capturedImage);
+
+    let existing = localStorage.getItem("IMAGESYMPTOMS");
+
+    if (existing === null) {
+      localStorage.setItem("IMAGESYMPTOMS", JSON.stringify([capturedImage]));
+    } else {
+      let curr = JSON.parse(existing); // now curr is always an array
+      curr.push(capturedImage);
+      localStorage.setItem("IMAGESYMPTOMS", JSON.stringify(curr));
+    }
+
     localStorage.setItem("AUDIOSYMPTOMS", editableTranscript);
     navigate("/moreSymptoms");
   };
@@ -67,7 +77,7 @@ export default function AudioCameraCombined() {
   }
 
   return (
-    <div className='getStarted' style={{ padding: "2vh 2vw" }} sx={{width:'100%'}}>
+    <div className='getStarted' style={{ padding: "2vh 2vw" }} sx={{ width: '100%' }}>
       <Fade in={show} timeout={500}>
         <Typography
           sx={{
@@ -93,8 +103,8 @@ export default function AudioCameraCombined() {
           backgroundColor: "#f5f4f4",
           borderRadius: "15px",
           boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px",
-          
-          
+
+
         }}
       >
         <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
