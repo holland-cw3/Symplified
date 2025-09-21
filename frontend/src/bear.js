@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import "./bear.css";
+// import "./bear.css";
 
 const Bear = ({ imgSrc, size = 125, speed = 30 }) => {
   const bearWidth = size;
