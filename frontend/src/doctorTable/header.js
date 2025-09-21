@@ -7,30 +7,31 @@ export default function(){
       const { logout, user } = useAuth0();
 
     return(
-         <div
+         <div className="header">
+            <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
+              <Typography variant="h6">
+                <strong>Hello, {user?.name}!</strong>
+              </Typography>
+            </div>
 
-        className="header"
-      >
-        <Typography variant="h6" style={{ minWidth: "250px" }}> 
-          <strong>Hello, {user?.name}!</strong>
-        </Typography>
-        <div style={{ height: "40px", display: "flex", justifyContent: "center", alignItems: "center", flexGrow: 1 }}>
-        <img 
-          src={logo} 
-          alt="Symplified Logo" 
-          style={{ height: "140%", objectFit: "contain" }}
-        />
-      </div>
-        <div>
-          <Button
-            variant="outlined"
-            onClick={() =>
-              logout({ returnTo: window.location.origin + "/doctorlogin" })
-            }
-          >
-            Log Out
-          </Button>
-        </div>
-      </div>
+            <div style={{ position: "absolute", left: "50%", transform: "translateX(-50%)" }}>
+              <img
+                src={logo}
+                alt="Symplified Logo"
+                style={{ height: "55px", objectFit: "contain" }}
+              />
+            </div>
+
+            <div style={{ flex: 1, display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+              <Button
+                variant="outlined"
+                onClick={() =>
+                  logout({ returnTo: window.location.origin + "/doctorlogin" })
+                }
+              >
+                Log Out
+              </Button>
+            </div>
+          </div>
     )
 }

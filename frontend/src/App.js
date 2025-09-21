@@ -44,19 +44,23 @@ export default function App() {
       <Route path='/basics' element={<BasicInfo/>}></Route>
 
       <Route path='/doctorlogin' element={<LoginScreen/>}></Route>
-      <Route path='/doctor' element={
-          <ProtectedRoute>
-            <Doctor />
-          </ProtectedRoute>
-        } 
-      />
-
-      <Route path='/patientfile' element={
+      {/* 
+<Route 
+  path='/doctor' 
+  element={
+    <ProtectedRoute>
+      <Doctor />
+    </ProtectedRoute>
+  } 
+/> 
+*/}
+      {/* <Route path='/patientfile' element={
           <ProtectedRoute>
             <PatientFile />
           </ProtectedRoute>
         } 
-      />
+      />*/}
+      
 
       <Route path='/doctor' element={<Doctor/>}></Route>
       <Route path='/patientfile' element={<PatientFile/>}></Route>
