@@ -1,4 +1,6 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file, abort
+import io
+import gridfs
 from flask_restful import Api, Resource
 from flask_cors import CORS
 from app.services.gemini_service import query_gemini
@@ -130,6 +132,23 @@ class DeleteEntry(Resource):
 api.add_resource(GetAllEntries, "/entries")
 api.add_resource(DeleteEntry, "/entries/<string:entry_id>")
 api.add_resource(ProcessInput, "/process")
+
+class GetImage(Resource):
+    def get(self, image_id):
+        try:
+            file_data = fs.get(ObjectId(image_id))
+            return send_file(
+                io.BytesIO(file_data.read()),  # convert GridOut to bytes
+                attachment_filename=file_data.filename,
+                mimetype='image/jpeg'          # adjust if some images are png/gif
+            )
+        except gridfs.errors.NoFile:
+            abort(404, description="Image not found")
+        except Exception as e:
+            abort(500, description=str(e))
+
+# Add the resource to your API
+api.add_resource(GetImage, "/image/<string:image_id>")
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
