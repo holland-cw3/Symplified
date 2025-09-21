@@ -20,7 +20,7 @@ function base64ToBlob(base64, mimeType = "image/jpeg") {
 }
 
 async function submit(){
-    // const formData = new FormData();
+    const formData = new FormData();
 
 
     const fields = [
