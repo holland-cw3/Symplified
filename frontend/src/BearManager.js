@@ -19,7 +19,7 @@ const getRandomX = (occupied = []) => {
 
 export default function BearManager() {
   const location = useLocation();
-  const bearRoutes = ["/", "/basics", "/symptoms","/moresymptoms", "/thanks"]; // only show bears on these routes
+  const bearRoutes = []; // only show bears on these routes
 
   if (!bearRoutes.includes(location.pathname)) return null;
 
