@@ -25,9 +25,12 @@ We then created the frontend for patient profiles, giving AI powered insights in
 
 # Challenges we ran into
 
+One of our biggest challenges was finding the right prompt to feed into Gemini. Some prompts gave us highly technical medical jargon which we couldn't comprehend, while other prompts failed to secure a straightforward diagnosis. After many rounds of testing we managed to develop a well-written prompt that gave us reliable and readable responses. Another roadblock we faced was integrating Auth0. Seeing as neither of us had worked with Auth0 before, it took some time to fully grasp how it worked. But we eventually figured it out and were able to seamlessly integrate Auth0 into our login page. Lastly, by far our biggest challenge, was staying awake for 24 hours after driving from Collge Park, Maryland at 5:00AM.
+
 
 # What we learned
-Abhi, 
+
+Abhyuday Srivatsa: I focused on developing Symplified's backend. I was able to improve on my skills with Python in general, but more specifically with Flask and API routing. I enjoyed bridging communication pipelines between our React frontend, Flask backend, and Mongo database. Lastly, I learnt a lot about prompt engineering and how to steer LLM's in the right direction
 
 Caleb Holland,
 
