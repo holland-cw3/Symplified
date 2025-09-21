@@ -37,6 +37,8 @@ Caleb Holland: I focused on developing Symplified's frontend, and also did a bit
 
 # What's next for Symplified
 
+- Training our own model
+- Driving home! (4hrs ;()
 
 # Screenshots (Graphic Image Warning)
 
