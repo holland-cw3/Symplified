@@ -8,6 +8,8 @@ That's why we built Symplified, an app that reduces time in the ER waiting room 
 
 # What it does
 
+Symplified collects basic information from users through a simple survey. Then users are able to take photos of their medical conditions and use Symplified's text-to-speech capabilities to describe their symptoms. Once the user enters all their information, Symplified uses a custom prompt to query Google Gemini to parse user input. All of this data is maintianed in MongoDB Atlas and is accessible to doctors using Symplified.  Once Doctors log in via Auth0's authentication services, they are able to see a dashboard of patients orderded by the severity of their medical conditions. Doctors can then select who to examine next, streamlining the processes from ER waiting room to being face-to-face with a doctor.
+
 
 # How we built it
 
