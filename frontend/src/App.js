@@ -44,23 +44,15 @@ export default function App() {
       <Route path='/basics' element={<BasicInfo/>}></Route>
 
       <Route path='/doctorlogin' element={<LoginScreen/>}></Route>
-<<<<<<< Updated upstream
-      <Route path='/doctor' element={
-=======
       
       <Route 
         path='/doctor' 
         element={
->>>>>>> Stashed changes
           <ProtectedRoute>
             <Doctor />
           </ProtectedRoute>
         } 
-<<<<<<< Updated upstream
-      />
-=======
       /> 
->>>>>>> Stashed changes
 
       <Route path='/patientfile' element={
           <ProtectedRoute>
@@ -68,13 +60,6 @@ export default function App() {
           </ProtectedRoute>
         } 
       />
-<<<<<<< Updated upstream
-=======
-      
->>>>>>> Stashed changes
-
-      <Route path='/doctor' element={<Doctor/>}></Route>
-      <Route path='/patientfile' element={<PatientFile/>}></Route>
 
 
 
